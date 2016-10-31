@@ -11,7 +11,7 @@ library(BMS)
 library(GA)
 
 # source the required function
-sourceDir <- function(path, trace = F, ...) {
+sourceDir <- function(path, trace = T, ...) {
   for (nm in list.files(path, pattern = "\\.[RrSsQq]$")) {
     if(trace) cat(nm,":")
     source(file.path(path, nm),...)
