@@ -1,5 +1,5 @@
-# experiment 1
-# ============
+# experiment 1 - real valued GA.
+# ==============================
 
 # assigns the simulator
 sim=simulator.deconstruct 
