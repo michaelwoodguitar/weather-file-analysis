@@ -26,12 +26,14 @@ simulator <- function(p){
        out$CIBSE.B,
            out$CIBSE.C,
             out$Top,
-            out$steps.per.hour)
+            out$steps.per.hour,
+            out$DelT)
   
   names(o) = c('CIBSE.A',
                'CIBSE.B',
                'CIBSE.C',
                'Top',
-               'steps.per.hour')
+               'steps.per.hour',
+               'deltaT')
   return(o)   
 }

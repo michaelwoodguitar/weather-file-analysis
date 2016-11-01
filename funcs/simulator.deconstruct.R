@@ -1,4 +1,7 @@
 simulator.deconstruct <- function(p){
+  
+  # this runs the simulator with the decomposed weather file.
+
   cat('In simulator')
   fileName="Mikefile.idf"
   # create the file
@@ -26,12 +29,14 @@ simulator.deconstruct <- function(p){
        out$CIBSE.B,
            out$CIBSE.C,
             out$Top,
-            out$steps.per.hour)
+            out$steps.per.hour,
+            out$DelT)
   
   names(o) = c('CIBSE.A',
                'CIBSE.B',
                'CIBSE.C',
                'Top',
-               'steps.per.hour')
+               'steps.per.hour',
+               'deltaT')
   return(o)   
 }

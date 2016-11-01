@@ -1,0 +1,210 @@
+ Shadowing Combinations
+..Solar Distribution=FullExterior
+..In the following, only the first 10 reference surfaces will be shown.
+..But all surfaces are used in the calculations.
+ ==================================
+ Surface=NORTHOBSTACLE is used as Receiving Surface in calculations and is convex.
+ Number of general casting surfaces=          10
+ ..Surface=SOUTHOBSTACLE
+ ..Surface=EASTOBSTACLE
+ ..Surface=WESTOBSTACLE
+ ..Surface=SHADEN
+ ..Surface=SHADES
+ ..Surface=SHADEE
+ ..Surface=SHADEW
+ ..Surface=SOUTHWALL
+ ..Surface=EASTWALL
+ ..Surface=WESTWALL
+ Number of back surfaces=           0
+ Number of receiving sub surfaces=           0
+ ==================================
+ Surface=Mir-NORTHOBSTACLE is used as Receiving Surface in calculations and is convex.
+ Number of general casting surfaces=           0
+ Number of back surfaces=           0
+ Number of receiving sub surfaces=           0
+ ==================================
+ Surface=SOUTHOBSTACLE is used as Receiving Surface in calculations and is convex.
+ Number of general casting surfaces=          10
+ ..Surface=NORTHOBSTACLE
+ ..Surface=EASTOBSTACLE
+ ..Surface=WESTOBSTACLE
+ ..Surface=SHADEN
+ ..Surface=SHADES
+ ..Surface=SHADEE
+ ..Surface=SHADEW
+ ..Surface=NORTHWALL
+ ..Surface=EASTWALL
+ ..Surface=WESTWALL
+ Number of back surfaces=           0
+ Number of receiving sub surfaces=           0
+ ==================================
+ Surface=Mir-SOUTHOBSTACLE is used as Receiving Surface in calculations and is convex.
+ Number of general casting surfaces=           0
+ Number of back surfaces=           0
+ Number of receiving sub surfaces=           0
+ ==================================
+ Surface=EASTOBSTACLE is used as Receiving Surface in calculations and is convex.
+ Number of general casting surfaces=          10
+ ..Surface=NORTHOBSTACLE
+ ..Surface=SOUTHOBSTACLE
+ ..Surface=WESTOBSTACLE
+ ..Surface=SHADEN
+ ..Surface=SHADES
+ ..Surface=SHADEE
+ ..Surface=SHADEW
+ ..Surface=NORTHWALL
+ ..Surface=SOUTHWALL
+ ..Surface=WESTWALL
+ Number of back surfaces=           0
+ Number of receiving sub surfaces=           0
+ ==================================
+ Surface=Mir-EASTOBSTACLE is used as Receiving Surface in calculations and is convex.
+ Number of general casting surfaces=           0
+ Number of back surfaces=           0
+ Number of receiving sub surfaces=           0
+ ==================================
+ Surface=WESTOBSTACLE is used as Receiving Surface in calculations and is convex.
+ Number of general casting surfaces=          10
+ ..Surface=NORTHOBSTACLE
+ ..Surface=SOUTHOBSTACLE
+ ..Surface=EASTOBSTACLE
+ ..Surface=SHADEN
+ ..Surface=SHADES
+ ..Surface=SHADEE
+ ..Surface=SHADEW
+ ..Surface=NORTHWALL
+ ..Surface=SOUTHWALL
+ ..Surface=EASTWALL
+ Number of back surfaces=           0
+ Number of receiving sub surfaces=           0
+ ==================================
+ Surface=Mir-WESTOBSTACLE is used as Receiving Surface in calculations and is convex.
+ Number of general casting surfaces=           0
+ Number of back surfaces=           0
+ Number of receiving sub surfaces=           0
+ ==================================
+ Surface=SHADEN is used as Receiving Surface in calculations and is convex.
+ Number of general casting surfaces=           1
+ ..Surface=NORTHWALL
+ Number of back surfaces=           0
+ Number of receiving sub surfaces=           0
+ ==================================
+ Surface=Mir-SHADEN is used as Receiving Surface in calculations and is convex.
+ Number of general casting surfaces=           2
+ ..Surface=SHADEW
+ ..Surface=NORTHWALL
+ Number of back surfaces=           0
+ Number of receiving sub surfaces=           0
+ ==================================
+ Surface=SHADES is used as Receiving Surface in calculations and is convex.
+ Number of general casting surfaces=           1
+ ..Surface=SOUTHWALL
+ Number of back surfaces=           0
+ Number of receiving sub surfaces=           0
+ ==================================
+ Surface=Mir-SHADES is used as Receiving Surface in calculations and is convex.
+ Number of general casting surfaces=           2
+ ..Surface=SHADEW
+ ..Surface=SOUTHWALL
+ Number of back surfaces=           0
+ Number of receiving sub surfaces=           0
+ ==================================
+ Surface=SHADEE is used as Receiving Surface in calculations and is convex.
+ Number of general casting surfaces=           1
+ ..Surface=EASTWALL
+ Number of back surfaces=           0
+ Number of receiving sub surfaces=           0
+ ==================================
+ Surface=Mir-SHADEE is used as Receiving Surface in calculations and is convex.
+ Number of general casting surfaces=           2
+ ..Surface=SHADEW
+ ..Surface=EASTWALL
+ Number of back surfaces=           0
+ Number of receiving sub surfaces=           0
+ ==================================
+ Surface=SHADEW is used as Receiving Surface in calculations and is convex.
+ Number of general casting surfaces=           0
+ Number of back surfaces=           0
+ Number of receiving sub surfaces=           0
+ ==================================
+ Surface=Mir-SHADEW is used as Receiving Surface in calculations and is convex.
+ Number of general casting surfaces=           0
+ Number of back surfaces=           0
+ Number of receiving sub surfaces=           0
+ ==================================
+ Surface=NORTHWALL is used as Receiving Surface in calculations and is convex.
+ Number of general casting surfaces=           4
+ ..Surface=SOUTHOBSTACLE
+ ..Surface=EASTOBSTACLE
+ ..Surface=WESTOBSTACLE
+ ..Surface=SHADEN
+ Number of back surfaces=           0
+ Number of receiving sub surfaces=           1
+ ....Surface=NORTHWINDOW
+ ==================================
+ Surface=NORTHWINDOW is not used as Receiving Surface in calculations.
+ Number of general casting surfaces=           0
+ Number of back surfaces=           0
+ Number of receiving sub surfaces=           0
+ ==================================
+ Surface=SOUTHWALL is used as Receiving Surface in calculations and is convex.
+ Number of general casting surfaces=           5
+ ..Surface=NORTHOBSTACLE
+ ..Surface=EASTOBSTACLE
+ ..Surface=WESTOBSTACLE
+ ..Surface=SHADES
+ ..Surface=SHADEW
+ Number of back surfaces=           0
+ Number of receiving sub surfaces=           1
+ ....Surface=SOUTHWINDOW
+ ==================================
+ Surface=SOUTHWINDOW is not used as Receiving Surface in calculations.
+ Number of general casting surfaces=           0
+ Number of back surfaces=           0
+ Number of receiving sub surfaces=           0
+ ==================================
+ Surface=EASTWALL is used as Receiving Surface in calculations and is convex.
+ Number of general casting surfaces=           4
+ ..Surface=NORTHOBSTACLE
+ ..Surface=SOUTHOBSTACLE
+ ..Surface=WESTOBSTACLE
+ ..Surface=SHADEE
+ Number of back surfaces=           0
+ Number of receiving sub surfaces=           1
+ ....Surface=EASTWINDOW
+ ==================================
+ Surface=EASTWINDOW is not used as Receiving Surface in calculations.
+ Number of general casting surfaces=           0
+ Number of back surfaces=           0
+ Number of receiving sub surfaces=           0
+ ==================================
+ Surface=WESTWALL is used as Receiving Surface in calculations and is convex.
+ Number of general casting surfaces=           4
+ ..Surface=NORTHOBSTACLE
+ ..Surface=SOUTHOBSTACLE
+ ..Surface=EASTOBSTACLE
+ ..Surface=SHADEW
+ Number of back surfaces=           0
+ Number of receiving sub surfaces=           1
+ ....Surface=WESTWINDOW
+ ==================================
+ Surface=WESTWINDOW is not used as Receiving Surface in calculations.
+ Number of general casting surfaces=           0
+ Number of back surfaces=           0
+ Number of receiving sub surfaces=           0
+ ==================================
+ Surface=FLOOR is not used as Receiving Surface in calculations.
+ Number of general casting surfaces=           0
+ Number of back surfaces=           0
+ Number of receiving sub surfaces=           0
+ ==================================
+ Surface=ROOF is used as Receiving Surface in calculations and is convex.
+ Number of general casting surfaces=           1
+ ..Surface=SHADEW
+ Number of back surfaces=           0
+ Number of receiving sub surfaces=           0
+ ==================================
+ Surface=PARTITIONS is not used as Receiving Surface in calculations.
+ Number of general casting surfaces=           0
+ Number of back surfaces=           0
+ Number of receiving sub surfaces=           0

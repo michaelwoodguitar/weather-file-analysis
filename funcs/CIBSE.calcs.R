@@ -122,14 +122,16 @@ CIBSE.calcs <- function(External.file){
                     CIBSE.C,
                     WeMax_month,
                     Top,
-                    steps.per.hour) # hours greater than the comfort temperature.
+                    steps.per.hour,
+                    DelT) # hours greater than the comfort temperature.
           
           names(o) <- c('CIBSE.A',
                         'CIBSE.B',
                         'CIBSE.C',
                         'WeMax_month',
                         'Top',
-                        'steps.per.hour')
+                        'steps.per.hour',
+                        'DelT')
                  
         return(o) # Need to put something in this output
 

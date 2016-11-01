@@ -1,0 +1,924 @@
+  Processing Data Dictionary (Energy+.idd) File -- Complete
+  Maximum number of Alpha Args=        4500
+  Maximum number of Numeric Args=       21040
+  Number of Object Definitions=         727
+  Number of Section Definitions=           2
+  Total Number of Alpha Fields=       18098
+  Total Number of Numeric Fields=       39469
+  Total Number of Fields=       57567
+  Processing Input Data File (in.idf) -- Start
+      1 !-Generator IDFEditor 1.44
+      2 !-Option OriginalOrderTop UseSpecialFormat
+      3 
+      4 !-NOTE: All comments with '!-' are ignored by the IDFEditor and are generated automatically.
+      5 !-      Use '!' comments if they need to be retained when using the IDFEditor.
+      6 
+      7 Schedule:Constant,ControlType,,1;
+      8 Schedule:Constant,Outdoor CO2 Schedule,,400;
+      9 
+     10 ZoneHVAC:EquipmentList,
+     11     EquipmentList,           !- Name
+     12     ZoneHVAC:Baseboard:Convective:Electric,  !- Zone Equipment 1 Object Type
+     13     Electric heater,         !- Zone Equipment 1 Name
+     14     1,                       !- Zone Equipment 1 Cooling Sequence
+     15     1;                       !- Zone Equipment 1 Heating or No-Load Sequence
+     16 
+     17 ThermostatSetpoint:SingleHeating,
+     18     ThermostatSetpoint,      !- Name
+     19     heatingsetpoint;         !- Setpoint Temperature Schedule Name
+     20 
+     21 ZoneControl:Thermostat,
+     22     ZoneControl,             !- Name
+     23     Main,                    !- Zone or ZoneList Name
+     24     ControlType,             !- Control Type Schedule Name
+     25     ThermostatSetpoint:SingleHeating,  !- Control 1 Object Type
+     26     ThermostatSetpoint;      !- Control 1 Name
+     27 
+     28 Daylighting:Controls,
+     29     Main,                    !- Zone Name
+     30     1,                       !- Total Daylighting Reference Points
+     31     0,                       !- X-Coordinate of First Reference Point {m}
+     32     0,                       !- Y-Coordinate of First Reference Point {m}
+     33     0.8,                     !- Z-Coordinate of First Reference Point {m}
+     34     ,                        !- X-Coordinate of Second Reference Point {m}
+     35     ,                        !- Y-Coordinate of Second Reference Point {m}
+     36     ,                        !- Z-Coordinate of Second Reference Point {m}
+     37     1,                       !- Fraction of Zone Controlled by First Reference Point
+     38     ,                        !- Fraction of Zone Controlled by Second Reference Point
+     39     500,                     !- Illuminance Setpoint at First Reference Point {lux}
+     40     500,                     !- Illuminance Setpoint at Second Reference Point {lux}
+     41     1,                       !- Lighting Control Type
+     42     0,                        !- Glare Calculation Azimuth Angle of View Direction Clockwise from Zone y-Axis {deg}
+     43     22,                      !- Maximum Allowable Discomfort Glare Index
+     44     0.3,                     !- Minimum Input Power Fraction for Continuous Dimming Control
+     45     0.2,                     !- Minimum Light Output Fraction for Continuous Dimming Control
+     46     1,                       !- Number of Stepped Control Steps
+     47     1,                       !- Probability Lighting will be Reset When Needed in Manual Stepped Control
+     48     Occupancy binary year;   !- Availability Schedule Name
+     49 
+     50 
+     51 OutputControl:Table:Style,
+     52     Comma;            !- Column Separator
+     53 
+     54 ZoneHVAC:EquipmentConnections,
+     55     Main,                    !- Zone Name
+     56     EquipmentList,           !- Zone Conditioning Equipment List Name
+     57     ,                        !- Zone Air Inlet Node or NodeList Name
+     58     ,                        !- Zone Air Exhaust Node or NodeList Name
+     59     Zone node,               !- Zone Air Node Name
+     60     Outside Node;            !- Zone Return Air Node Name
+     61 
+     62 WindowMaterial:Shade,
+     63     MEDIUM REFLECT - MEDIUM TRANS SHADE,  !- Name
+     64     0.4,                     !- Solar Transmittance {dimensionless}
+     65     0.5,                     !- Solar Reflectance {dimensionless}
+     66     0.4,                     !- Visible Transmittance {dimensionless}
+     67     0.5,                     !- Visible Reflectance {dimensionless}
+     68     0.9,                     !- Infrared Hemispherical Emissivity {dimensionless}
+     69     0.0,                     !- Infrared Transmittance {dimensionless}
+     70     0.005,                   !- Thickness {m}
+     71     0.1,                     !- Conductivity {W/m-K}
+     72     0.05,                    !- Shade to Glass Distance {m}
+     73     0.5,                     !- Top Opening Multiplier
+     74     0.5,                     !- Bottom Opening Multiplier
+     75     0.5,                     !- Left-Side Opening Multiplier
+     76     0.5,                     !- Right-Side Opening Multiplier
+     77     0.0;                     !- Airflow Permeability {dimensionless}
+     78 
+     79 WindowMaterial:Shade,
+     80     MEDIUM REFLECT - LOW TRANS SHADE,  !- Name
+     81     0.1,                     !- Solar Transmittance {dimensionless}
+     82     0.5,                     !- Solar Reflectance {dimensionless}
+     83     0.1,                     !- Visible Transmittance {dimensionless}
+     84     0.5,                     !- Visible Reflectance {dimensionless}
+     85     0.9,                     !- Infrared Hemispherical Emissivity {dimensionless}
+     86     0.0,                     !- Infrared Transmittance {dimensionless}
+     87     0.005,                   !- Thickness {m}
+     88     0.1,                     !- Conductivity {W/m-K}
+     89     0.05,                    !- Shade to Glass Distance {m}
+     90     0.5,                     !- Top Opening Multiplier
+     91     0.5,                     !- Bottom Opening Multiplier
+     92     0.5,                     !- Left-Side Opening Multiplier
+     93     0.5,                     !- Right-Side Opening Multiplier
+     94     0.0;                     !- Airflow Permeability {dimensionless}
+     95 
+     96 WindowMaterial:Shade,
+     97     LOW REFLECT - HIGH TRANS SHADE,  !- Name
+     98     0.7,                     !- Solar Transmittance {dimensionless}
+     99     0.2,                     !- Solar Reflectance {dimensionless}
+    100     0.7,                     !- Visible Transmittance {dimensionless}
+    101     0.2,                     !- Visible Reflectance {dimensionless}
+    102     0.9,                     !- Infrared Hemispherical Emissivity {dimensionless}
+    103     0.0,                     !- Infrared Transmittance {dimensionless}
+    104     0.005,                   !- Thickness {m}
+    105     0.1,                     !- Conductivity {W/m-K}
+    106     0.05,                    !- Shade to Glass Distance {m}
+    107     0.5,                     !- Top Opening Multiplier
+    108     0.5,                     !- Bottom Opening Multiplier
+    109     0.5,                     !- Left-Side Opening Multiplier
+    110     0.5,                     !- Right-Side Opening Multiplier
+    111     0.0;                     !- Airflow Permeability {dimensionless}
+    112 
+    113 GlobalGeometryRules,
+    114     LowerLeftCorner,         !- Starting Vertex Position
+    115     Counterclockwise,        !- Vertex Entry Direction
+    116     Absolute,                !- Coordinate System
+    117     Relative,                !- Daylighting Reference Point Coordinate System
+    118     Relative;                !- Rectangular Surface Coordinate System
+    119 
+    120 Zone,
+    121     Main,                    !- Name
+    122     ,                        !- Direction of Relative North {deg}
+    123     , , ,                               !- X,Y,Z  {m}
+    124     1,                       !- Type
+    125     1,                       !- Multiplier
+    126     autocalculate,           !- Ceiling Height {m}
+    127     autocalculate,           !- Volume {m3}
+    128     autocalculate,           !- Floor Area {m2}
+    129     ,                        !- Zone Inside Convection Algorithm
+    130     ,                        !- Zone Outside Convection Algorithm
+    131     Yes;                     !- Part of Total Floor Area
+    132 
+    133 !-   ===========  ALL OBJECTS IN CLASS: SCHEDULETYPELIMITS ===========
+    134 
+    135 ScheduleTypeLimits,
+    136     lights,                  !- Name
+    137     0,                       !- Lower Limit Value
+    138     1,                       !- Upper Limit Value
+    139     Continuous;              !- Numeric Type
+    140 
+    141 ScheduleTypeLimits,
+    142     occupancy binary,        !- Name
+    143     0,                       !- Lower Limit Value
+    144     1,                       !- Upper Limit Value
+    145     Continuous;              !- Numeric Type
+    146 
+    147 ScheduleTypeLimits,
+    148     equip,                   !- Name
+    149     0,                       !- Lower Limit Value
+    150     1,                       !- Upper Limit Value
+    151     Continuous;              !- Numeric Type
+    152 
+    153 ScheduleTypeLimits,
+    154     Activity-limits,         !- Name
+    155     0,                       !- Lower Limit Value
+    156     80,                      !- Upper Limit Value
+    157     Continuous,              !- Numeric Type
+    158     ActivityLevel;           !- Unit Type
+    159 
+    160 ScheduleTypeLimits,
+    161     Always off,              !- Name
+    162     0,                       !- Lower Limit Value
+    163     0,                       !- Upper Limit Value
+    164     Continuous,              !- Numeric Type
+    165     Dimensionless;           !- Unit Type
+    166 
+    167 ScheduleTypeLimits,
+    168     Velocity,                !- Name
+    169     0.1,                     !- Lower Limit Value
+    170     0.1,                     !- Upper Limit Value
+    171     Continuous,              !- Numeric Type
+    172     Velocity;                !- Unit Type
+    173 
+    174 ScheduleTypeLimits,
+    175     Always On,               !- Name
+    176     1,                       !- Lower Limit Value
+    177     1,                       !- Upper Limit Value
+    178     Continuous,              !- Numeric Type
+    179     Dimensionless;           !- Unit Type
+    180 
+    181 ScheduleTypeLimits,
+    182     Clothing limits,         !- Name
+    183     0.5,                     !- Lower Limit Value
+    184     3,                       !- Upper Limit Value
+    185     Continuous,              !- Numeric Type
+    186     ConvectionCoefficient;   !- Unit Type
+    187 
+    188 ScheduleTypeLimits,
+    189     Heating limits,          !- Name
+    190     -50,                     !- Lower Limit Value
+    191     50,                      !- Upper Limit Value
+    192     Continuous,              !- Numeric Type
+    193     Temperature;   !- Unit Type
+    194 
+    195 
+    196 !-   ===========  ALL OBJECTS IN CLASS: SCHEDULE:DAY:INTERVAL ===========
+    197 
+    198 Schedule:Day:Interval,
+    199     Office Occupancy schedule day,  !- Name
+    200     occupancy binary,        !- Schedule Type Limits Name
+    201     No,                      !- Interpolate to Timestep
+    202     07:00,                   !- Time 1 {hh:mm}
+    203     0,                       !- Value Until Time 1
+    204     08:00,                   !- Time 2 {hh:mm}
+    205     0.25,                    !- Value Until Time 2
+    206     09:00,                   !- Time 3 {hh:mm}
+    207     0.5,                     !- Value Until Time 3
+    208     12:00,                   !- Time 4 {hh:mm}
+    209     1,                       !- Value Until Time 4
+    210     14:00,                   !- Time 5 {hh:mm}
+    211     0.75,                    !- Value Until Time 5
+    212     17:00,                   !- Time 6 {hh:mm}
+    213     1,                       !- Value Until Time 6
+    214     18:00,                   !- Time 7 {hh:mm}
+    215     0.5,                     !- Value Until Time 7
+    216     19:00,                   !- Time 8 {hh:mm}
+    217     0.25,                    !- Value Until Time 8
+    218     24:00,                   !- Time 9 {hh:mm}
+    219     0;                       !- Value Until Time 9
+    220 
+    221 Schedule:Day:Interval,
+    222     Office Occupancy schedule wknd,  !- Name
+    223     occupancy binary,        !- Schedule Type Limits Name
+    224     No,                      !- Interpolate to Timestep
+    225     24:00,                   !- Time 1 {hh:mm}
+    226     0;                       !- Value Until Time 1
+    227 
+    228 Schedule:Day:Interval,
+    229     Office light schedule day,  !- Name
+    230     lights,                  !- Schedule Type Limits Name
+    231     No,                      !- Interpolate to Timestep
+    232     07:00,                   !- Time 1 {hh:mm}
+    233     0,                       !- Value Until Time 1
+    234     19:00,                   !- Time 2 {hh:mm}
+    235     1,                       !- Value Until Time 2
+    236     24:00,                   !- Time 3 {hh:mm}
+    237     0;                       !- Value Until Time 3
+    238 
+    239 Schedule:Day:Interval,
+    240     Office light schedule wknd,  !- Name
+    241     lights,                  !- Schedule Type Limits Name
+    242     No,                      !- Interpolate to Timestep
+    243     24:00,                   !- Time 1 {hh:mm}
+    244     0;                       !- Value Until Time 1
+    245 
+    246 Schedule:Day:Interval,
+    247     Office equip schedule day,  !- Name
+    248     equip,                   !- Schedule Type Limits Name
+    249     No,                      !- Interpolate to Timestep
+    250     07:00,                   !- Time 1 {hh:mm}
+    251     0.0539,                  !- Value Until Time 1
+    252     19:00,                   !- Time 2 {hh:mm}
+    253     1,                       !- Value Until Time 2
+    254     24:00,                   !- Time 3 {hh:mm}
+    255     0.0539;                  !- Value Until Time 3
+    256 
+    257 Schedule:Day:Interval,
+    258     Office equip schedule wknd,  !- Name
+    259     equip,                   !- Schedule Type Limits Name
+    260     No,                      !- Interpolate to Timestep
+    261     24:00,                   !- Time 1 {hh:mm}
+    262     0.0539;                  !- Value Until Time 1
+    263 
+    264 Schedule:Day:Interval,
+    265     Office Occupancy schedule day binary,  !- Name
+    266     occupancy binary,        !- Schedule Type Limits Name
+    267     No,                      !- Interpolate to Timestep
+    268     07:00,                   !- Time 1 {hh:mm}
+    269     0,                       !- Value Until Time 1
+    270     08:00,                   !- Time 2 {hh:mm}
+    271     1,                       !- Value Until Time 2
+    272     09:00,                   !- Time 3 {hh:mm}
+    273     1,                       !- Value Until Time 3
+    274     12:00,                   !- Time 4 {hh:mm}
+    275     1,                       !- Value Until Time 4
+    276     14:00,                   !- Time 5 {hh:mm}
+    277     1,                       !- Value Until Time 5
+    278     17:00,                   !- Time 6 {hh:mm}
+    279     1,                       !- Value Until Time 6
+    280     18:00,                   !- Time 7 {hh:mm}
+    281     1,                       !- Value Until Time 7
+    282     19:00,                   !- Time 8 {hh:mm}
+    283     1,                       !- Value Until Time 8
+    284     24:00,                   !- Time 9 {hh:mm}
+    285     0;                       !- Value Until Time 9
+    286 
+    287 Schedule:Day:Interval,
+    288     Office Ventilation schedule day,  !- Name
+    289     occupancy binary,        !- Schedule Type Limits Name
+    290     No,                      !- Interpolate to Timestep
+    291     07:00,                   !- Time 1 {hh:mm}
+    292     0.5,                     !- Value Until Time 1
+    293     08:00,                   !- Time 2 {hh:mm}
+    294     1,                       !- Value Until Time 2
+    295     09:00,                   !- Time 3 {hh:mm}
+    296     1,                       !- Value Until Time 3
+    297     12:00,                   !- Time 4 {hh:mm}
+    298     1,                       !- Value Until Time 4
+    299     14:00,                   !- Time 5 {hh:mm}
+    300     1,                       !- Value Until Time 5
+    301     17:00,                   !- Time 6 {hh:mm}
+    302     1,                       !- Value Until Time 6
+    303     18:00,                   !- Time 7 {hh:mm}
+    304     1,                       !- Value Until Time 7
+    305     19:00,                   !- Time 8 {hh:mm}
+    306     1,                       !- Value Until Time 8
+    307     24:00,                   !- Time 9 {hh:mm}
+    308     0.5;                     !- Value Until Time 9
+    309 
+    310 Schedule:Day:Interval,
+    311     Office Ventilation schedule wknd,  !- Name
+    312     occupancy binary,        !- Schedule Type Limits Name
+    313     No,                      !- Interpolate to Timestep
+    314     24:00,                   !- Time 1 {hh:mm}
+    315     0.5;                     !- Value Until Time 1
+    316 
+    317 
+    318 !-   ===========  ALL OBJECTS IN CLASS: SCHEDULE:WEEK:DAILY ===========
+    319 
+    320 Schedule:Week:Daily,
+    321     Schedule occupancy,      !- Name
+    322     Office Occupancy schedule wknd,  !- Sunday Schedule:Day Name
+    323     Office Occupancy schedule day,  !- Monday Schedule:Day Name
+    324     Office Occupancy schedule day,  !- Tuesday Schedule:Day Name
+    325     Office Occupancy schedule day,  !- Wednesday Schedule:Day Name
+    326     Office Occupancy schedule day,  !- Thursday Schedule:Day Name
+    327     Office Occupancy schedule day,  !- Friday Schedule:Day Name
+    328     Office Occupancy schedule wknd,  !- Saturday Schedule:Day Name
+    329     Office Occupancy schedule wknd,  !- Holiday Schedule:Day Name
+    330     Office Occupancy schedule day,  !- SummerDesignDay Schedule:Day Name
+    331     Office Occupancy schedule day,  !- WinterDesignDay Schedule:Day Name
+    332     Office Occupancy schedule day,  !- CustomDay1 Schedule:Day Name
+    333     Office Occupancy schedule day;  !- CustomDay2 Schedule:Day Name
+    334 
+    335 Schedule:Week:Daily,
+    336     Schedule lighting,       !- Name
+    337     Office light schedule wknd,  !- Sunday Schedule:Day Name
+    338     Office light schedule day,  !- Monday Schedule:Day Name
+    339     Office light schedule day,  !- Tuesday Schedule:Day Name
+    340     Office light schedule day,  !- Wednesday Schedule:Day Name
+    341     Office light schedule day,  !- Thursday Schedule:Day Name
+    342     Office light schedule day,  !- Friday Schedule:Day Name
+    343     Office light schedule wknd,  !- Saturday Schedule:Day Name
+    344     Office light schedule day,  !- Holiday Schedule:Day Name
+    345     Office light schedule day,  !- SummerDesignDay Schedule:Day Name
+    346     Office light schedule day,  !- WinterDesignDay Schedule:Day Name
+    347     Office light schedule day,  !- CustomDay1 Schedule:Day Name
+    348     Office light schedule day;  !- CustomDay2 Schedule:Day Name
+    349 
+    350 Schedule:Week:Daily,
+    351     Schedule equip,          !- Name
+    352     Office equip schedule wknd,  !- Sunday Schedule:Day Name
+    353     Office equip schedule day,  !- Monday Schedule:Day Name
+    354     Office equip schedule day,  !- Tuesday Schedule:Day Name
+    355     Office equip schedule day,  !- Wednesday Schedule:Day Name
+    356     Office equip schedule day,  !- Thursday Schedule:Day Name
+    357     Office equip schedule day,  !- Friday Schedule:Day Name
+    358     Office equip schedule wknd,  !- Saturday Schedule:Day Name
+    359     Office equip schedule day,  !- Holiday Schedule:Day Name
+    360     Office equip schedule day,  !- SummerDesignDay Schedule:Day Name
+    361     Office equip schedule day,  !- WinterDesignDay Schedule:Day Name
+    362     Office equip schedule day,  !- CustomDay1 Schedule:Day Name
+    363     Office equip schedule day;  !- CustomDay2 Schedule:Day Name
+    364 
+    365 Schedule:Week:Daily,
+    366     Schedule occupancy binary,  !- Name
+    367     Office Occupancy schedule wknd,  !- Sunday Schedule:Day Name
+    368     Office Occupancy schedule day binary,  !- Monday Schedule:Day Name
+    369     Office Occupancy schedule day binary,  !- Tuesday Schedule:Day Name
+    370     Office Occupancy schedule day binary,  !- Wednesday Schedule:Day Name
+    371     Office Occupancy schedule day binary,  !- Thursday Schedule:Day Name
+    372     Office Occupancy schedule day binary,  !- Friday Schedule:Day Name
+    373     Office Occupancy schedule wknd,  !- Saturday Schedule:Day Name
+    374     Office Occupancy schedule wknd,  !- Holiday Schedule:Day Name
+    375     Office Occupancy schedule wknd,  !- SummerDesignDay Schedule:Day Name
+    376     Office Occupancy schedule day binary,  !- WinterDesignDay Schedule:Day Name
+    377     Office Occupancy schedule day binary,  !- CustomDay1 Schedule:Day Name
+    378     Office Occupancy schedule day binary;  !- CustomDay2 Schedule:Day Name
+    379 
+    380 Schedule:Week:Daily,
+    381     Schedule Ventilation,      !- Name
+    382     Office Ventilation schedule wknd,  !- Sunday Schedule:Day Name
+    383     Office Ventilation schedule day,  !- Monday Schedule:Day Name
+    384     Office Ventilation schedule day,  !- Tuesday Schedule:Day Name
+    385     Office Ventilation schedule day,  !- Wednesday Schedule:Day Name
+    386     Office Ventilation schedule day,  !- Thursday Schedule:Day Name
+    387     Office Ventilation schedule day,  !- Friday Schedule:Day Name
+    388     Office Ventilation schedule wknd,  !- Saturday Schedule:Day Name
+    389     Office Ventilation schedule wknd,  !- Holiday Schedule:Day Name
+    390     Office Ventilation schedule day,  !- SummerDesignDay Schedule:Day Name
+    391     Office Ventilation schedule day,  !- WinterDesignDay Schedule:Day Name
+    392     Office Ventilation schedule day,  !- CustomDay1 Schedule:Day Name
+    393     Office Ventilation schedule day;  !- CustomDay2 Schedule:Day Name
+    394 
+    395 !-   ===========  ALL OBJECTS IN CLASS: SCHEDULE:YEAR ===========
+    396 
+    397 Schedule:Year,
+    398     Occupancy Year,          !- Name
+    399     occupancy binary,        !- Schedule Type Limits Name
+    400     Schedule occupancy,      !- Schedule:Week Name 1
+    401     1,                       !- Start Month 1
+    402     1,                       !- Start Day 1
+    403     12,                      !- End Month 1
+    404     31;                      !- End Day 1
+    405 
+    406 Schedule:Year,
+    407     Lighting Year,           !- Name
+    408     lights,                  !- Schedule Type Limits Name
+    409     Schedule lighting,       !- Schedule:Week Name 1
+    410     1,                       !- Start Month 1
+    411     1,                       !- Start Day 1
+    412     12,                      !- End Month 1
+    413     31;                      !- End Day 1
+    414 
+    415 Schedule:Year,
+    416     Equipment Year,          !- Name
+    417     lights,                  !- Schedule Type Limits Name
+    418     Schedule equip,          !- Schedule:Week Name 1
+    419     1,                       !- Start Month 1
+    420     1,                       !- Start Day 1
+    421     12,                      !- End Month 1
+    422     31;                      !- End Day 1
+    423 
+    424 Schedule:Year,
+    425     Occupancy binary year,   !- Name
+    426     occupancy binary,        !- Schedule Type Limits Name
+    427     Schedule occupancy binary,  !- Schedule:Week Name 1
+    428     1,                       !- Start Month 1
+    429     1,                       !- Start Day 1
+    430     12,                      !- End Month 1
+    431     31;                      !- End Day 1
+    432 
+    433 Schedule:Year,
+    434     Ventilation year,   !- Name
+    435     occupancy binary,        !- Schedule Type Limits Name
+    436     Schedule Ventilation,  !- Schedule:Week Name 1
+    437     1,                       !- Start Month 1
+    438     1,                       !- Start Day 1
+    439     12,                      !- End Month 1
+    440     31;                      !- End Day 1
+    441 
+    442 !-   ===========  ALL OBJECTS IN CLASS: SCHEDULE:CONSTANT ===========
+    443 
+    444 Schedule:Constant,
+    445     off,                     !- Name
+    446     Always off,              !- Schedule Type Limits Name
+    447     0;                       !- Hourly Value
+    448 
+    449 Schedule:Constant,
+    450     Air velocity,            !- Name
+    451     Velocity,                !- Schedule Type Limits Name
+    452     0.1;                     !- Hourly Value
+    453 
+    454 Schedule:Constant,
+    455     On,                      !- Name
+    456     Always On,               !- Schedule Type Limits Name
+    457     1;                       !- Hourly Value
+    458 
+    459 Schedule:Constant,
+    460     Clothing constant,       !- Name
+    461     Clothing limits,         !- Schedule Type Limits Name
+    462     2;                       !- Hourly Value
+    463 
+    464 Version,8.1;
+    465 
+    466 SimulationControl,
+    467     No,                      !- Do Zone Sizing Calculation
+    468     No,                      !- Do System Sizing Calculation
+    469     No,                      !- Do Plant Sizing Calculation
+    470     No,                      !- Run Simulation for Sizing Periods
+    471     Yes;                     !- Run Simulation for Weather File Run Periods
+    472 
+    473 Building,
+    474     Building,                !- Name
+    475     ,                        !- North Axis {deg}
+    476     Urban,                   !- Terrain
+    477     0.04,                    !- Loads Convergence Tolerance Value
+    478     0.4,                     !- Temperature Convergence Tolerance Value {deltaC}
+    479     FullExterior,            !- Solar Distribution
+    480     25,                      !- Maximum Number of Warmup Days
+    481     6;                       !- Minimum Number of Warmup Days
+    482 
+    483 ShadowCalculation,
+    484     AverageOverDaysInFrequency,  !- Calculation Method
+    485     20,                      !- Calculation Frequency
+    486     15000;                   !- Maximum Figures in Shadow Overlap Calculations
+    487 
+    488 SurfaceConvectionAlgorithm:Inside,TARP;
+    489 SurfaceConvectionAlgorithm:Outside,DOE-2;
+    490 HeatBalanceAlgorithm,ConductionTransferFunction,200,0.1,1000;
+    491 Timestep,12;
+    492 
+    493 ProgramControl,
+    494     4;                       !- Number of Threads Allowed
+    495 
+    496 RunPeriod,
+    497     Year,                    !- Name
+    498     1,                       !- Begin Month
+    499     1,                       !- Begin Day of Month
+    500     12,                      !- End Month
+    501     31,                      !- End Day of Month
+    502     UseWeatherFile,          !- Day of Week for Start Day
+    503     Yes,                     !- Use Weather File Holidays and Special Days
+    504     Yes,                     !- Use Weather File Daylight Saving Period
+    505     No,                      !- Apply Weekend Holiday Rule
+    506     Yes,                     !- Use Weather File Rain Indicators
+    507     Yes,                     !- Use Weather File Snow Indicators
+    508     1,                       !- Number of Times Runperiod to be Repeated
+    509     Yes;                     !- Increment Day of Week on repeat
+    510 
+    511 Construction,
+    512     Sgl Clr 6mm,             !- Name
+    513     CLEAR 6MM;               !- Outside Layer
+    514 
+    515 Construction,
+    516     Dbl Clr 6mm/13mm Air,    !- Name
+    517     CLEAR 6MM,               !- Outside Layer
+    518     AIR 13MM,                !- Layer 2
+    519     CLEAR 6MM;               !- Layer 3
+    520 
+    521 Construction,
+    522     Dbl loE Clr 6mm/13mm Argon, !- Name
+    523     LoE CLEAR 6MM,              !- Outside Layer
+    524     ARGON 13MM,                 !- Layer 2
+    525     CLEAR 6MM;                  !- Layer 3
+    526 
+    527 Construction,
+    528     Trp LoE (e5=.1) Clr 3mm/13mm Arg,  !- Name
+    529     CLEAR 3MM,               !- Outside Layer
+    530     ARGON 13MM,              !- Layer 2
+    531     CLEAR 3MM,               !- Layer 3
+    532     ARGON 13MM,              !- Layer 4
+    533     LoE CLEAR 3MM Rev;       !- Layer 5
+    534 
+    535 WindowMaterial:Gas,
+    536     AIR 13MM,                !- Name
+    537     Air,                     !- Gas Type
+    538     0.0127;                  !- Thickness {m}
+    539 
+    540 WindowMaterial:Gas,
+    541     ARGON 13MM,              !- Name
+    542     Argon,                   !- Gas Type
+    543     0.0127;                  !- Thickness {m}
+    544 
+    545 Construction,
+    546     WallConstruction,        !- Name
+    547     M01 100mm brick,         !- Outside Layer
+    548     InsulationWalls,         !- Layer 2
+    549     Concrete;                !- Layer 3
+    550 
+    551 
+    552 Construction,
+    553     RoofConstruction,        !- Name
+    554     Tiles,                   !- Outside Layer
+    555     Membrane,                !- Layer 2
+    556     InsulationRoof,          !- Layer 3
+    557     Plasterboard;            !- Layer 4
+    558 
+    559 Construction,
+    560     FloorConstruction,       !- Name
+    561     InsulationFloor,         !- Outside Layer
+    562     ConcreteFloor,              !- Layer 2
+      ***** Tabs eliminated from above line
+    563     Cavity,                  !- Layer 3
+    564     Chipboard,              !- Layer 4
+      ***** Tabs eliminated from above line
+    565     Carpet;                  !- Layer 5
+    566 
+    567 WindowProperty:FrameAndDivider,
+    568     Frame,                   !- Name
+    569     0.025,                   !- Frame Width {m}
+    570     0.3,                     !- Frame Outside Projection {m}
+    571     0.3,                     !- Frame Inside Projection {m}
+    572     2.2,                     !- Frame Conductance {W/m2-K}
+    573     1,                       !- Ratio of Frame-Edge Glass Conductance to Center-Of-Glass Conductance
+    574     0.7,                     !- Frame Solar Absorptance
+    575     0.7,                     !- Frame Visible Absorptance
+    576     0.9,                     !- Frame Thermal Hemispherical Emissivity
+    577     DividedLite,             !- Divider Type
+    578     ,                        !- Divider Width {m}
+    579     ,                        !- Number of Horizontal Dividers
+    580     ,                        !- Number of Vertical Dividers
+    581     ,                        !- Divider Outside Projection {m}
+    582     ,                        !- Divider Inside Projection {m}
+    583     ,                        !- Divider Conductance {W/m2-K}
+    584     1,                       !- Ratio of Divider-Edge Glass Conductance to Center-Of-Glass Conductance
+    585     ,                        !- Divider Solar Absorptance
+    586     ,                        !- Divider Visible Absorptance
+    587     0.9;                     !- Divider Thermal Hemispherical Emissivity
+    588 
+    589 
+    590 Material,Membrane,MediumRough,0.0001,1,1100,1000,,,;
+    591 Material,Plasterboard,MediumRough,0.0125,0.21,700,1000,,,;
+    592 Material,InsulationFloor,MediumRough,0.11,0.025,700,1000,,,;
+    593 Material,ConcreteFloor,MediumRough,0.1,2.3,2300,1000,,,;
+    594 Material:NoMass,Cavity,MediumRough,0.21,,,;
+    595 Material,Chipboard,MediumRough,0.02,0.13,500,1600,,,;
+    596 Material,Carpet,MediumRough,0.01,0.04,160,1360,,,;
+    597 
+    598 ZoneAirContaminantBalance,Yes,Outdoor CO2 Schedule,yes,Outdoor CO2 Schedule;
+    599 Output:VariableDictionary,regular;
+    600 Output:Variable,*,People Occupant Count, Timestep;
+    601 Output:Variable,*,Zone Air Temperature, Timestep;
+    602 Output:Variable,*,Zone Mean Radiant Temperature, Timestep;
+    603 Output:Variable,*,Zone Air Relative Humidity, Timestep;
+    604 Output:Variable,*,Baseboard Electric Power, Timestep;
+    605 Output:Variable,*,Surface Inside Face Solar Radiation Heat Gain Rate per Area,Timestep;
+    606 Output:Variable,*,Site Outdoor Air Drybulb Temperature ,Timestep;
+    607 Output:Variable,*,Site Direct Solar Radiation Rate per Area ,Timestep;
+    608 
+    609 
+    610 ZoneHVAC:Baseboard:Convective:Electric,Electric heater,Occupancy binary year,8194.810508,1;
+    611 
+    612 Material,Tiles,MediumRough,0.0127,0.84,1900,800,,0.500000,;
+    613 
+    614 
+    615 Material,Concrete,MediumRough,0.275000,1.4,2100,840,,,;
+    616 
+    617 
+    618 Material,InsulationWalls,MediumRough,0.085582,0.03,43,1210,,,;
+    619 
+    620 
+    621 Material,InsulationRoof,MediumRough,0.091458,0.03,43,1210,,,;
+    622 Material,M01 100mm brick,MediumRough,0.1016,0.89,1920,790,,,;
+    623 
+    624 WindowMaterial:Glazing,CLEAR 6MM,SpectralAverage,,0.006,0.775,0.071,0.071,0.881,0.080,0.080,0.0,0.84,0.84,0.9,,,,;
+    625 
+    626 WindowMaterial:Glazing,CLEAR 3MM,SpectralAverage,,0.003,0.837,0.075,0.075,0.898,0.081,0.081,0.0,0.84,0.84,0.9,,,,;
+    627 
+    628 WindowMaterial:Glazing,LoE CLEAR 3MM Rev,SpectralAverage,,0.003,0.630,0.220,0.190,0.850,0.079,0.056,0.0,0.10,0.84,0.9,,,,;
+    629 
+    630 WindowMaterial:Glazing,LoE CLEAR 6MM,SpectralAverage,,0.006,0.630,0.220,0.190,0.850,0.079,0.056,0.0,0.84,0.1,0.9,,,,;
+    631 
+    632 BuildingSurface:Detailed,Floor,floor,floorConstruction,Main,Ground,,NoSun,NoWind,autocalculate,autocalculate,
+    633 
+    634 
+    635 -4.135215, 5.513620, 0.000000,
+    636 
+    637 4.135215, 5.513620, 0.000000,
+    638 
+    639 4.135215, -5.513620, 0.000000,
+    640 
+    641 -4.135215, -5.513620, 0.000000;
+    642 
+    643 
+    644 
+    645 BuildingSurface:Detailed,Roof,Roof,roofConstruction,Main,outdoors,,SunExposed,windExposed,autocalculate,autocalculate,
+    646 
+    647 
+    648 -4.135215, -5.513620, 2.800000,
+    649 
+    650 4.135215, -5.513620, 2.800000,
+    651 
+    652 4.135215, 5.513620, 2.800000,
+    653 
+    654 -4.135215, 5.513620, 2.800000;
+    655 
+    656 
+    657 
+    658 BuildingSurface:Detailed,NorthWall,wall,WallConstruction,Main,outdoors,,SunExposed,windExposed,0,autocalculate,
+    659 
+    660 
+    661 4.135215, 5.513620, 0.000000,
+    662 
+    663 -4.135215, 5.513620, 0.000000,
+    664 
+    665 -4.135215, 5.513620, 2.800000,
+    666 
+    667 4.135215, 5.513620, 2.800000;
+    668 
+    669 
+    670 
+    671 BuildingSurface:Detailed,SouthWall,wall,WallConstruction,Main,outdoors,,SunExposed,windExposed,0,autocalculate,
+    672 
+    673 
+    674 -4.135215, -5.513620, 0.000000,
+    675 
+    676 4.135215, -5.513620, 0.000000,
+    677 
+    678 4.135215, -5.513620, 2.800000,
+    679 
+    680 -4.135215, -5.513620, 2.800000;
+    681 
+    682 
+    683 
+    684 BuildingSurface:Detailed,EastWall,wall,WallConstruction,Main,outdoors,,SunExposed,windExposed,0,autocalculate,
+    685 
+    686 
+    687 4.135215, -5.513620, 0.000000,
+    688 
+    689 4.135215, 5.513620, 0.000000,
+    690 
+    691 4.135215, 5.513620, 2.800000,
+    692 
+    693 4.135215, -5.513620, 2.800000;
+    694 
+    695 
+    696 
+    697 BuildingSurface:Detailed,WestWall,wall,WallConstruction,Main,outdoors,,SunExposed,windExposed,0,autocalculate,
+    698 
+    699 
+    700 -4.135215, -5.513620, 0.000000,
+    701 
+    702 -4.135215, -5.513620, 2.800000,
+    703 
+    704 -4.135215, 5.513620, 2.800000,
+    705 
+    706 -4.135215, 5.513620, 0.000000;
+    707 
+    708 
+    709 
+    710 WindowProperty:ShadingControl,WinShading,InteriorShade,,OnIfHighOutdoorAirTemperature,On,28,Yes,No,MEDIUM REFLECT - LOW TRANS SHADE,FixedSlatAngle,,;
+    711 
+    712 FenestrationSurface:Detailed,NorthWindow,Window,Dbl loE Clr 6mm/13mm Argon,NorthWall,,0,WinShading,FRAME, 1,autocalculate,
+    713 
+    714 
+    715 2.773986, 5.513620, 0.460851,
+    716 
+    717 -2.773986, 5.513620, 0.460851,
+    718 
+    719 -2.773986, 5.513620, 2.339149,
+    720 
+    721 2.773986, 5.513620, 2.339149;
+    722 
+    723 
+    724 
+    725 FenestrationSurface:Detailed,SouthWindow,Window,Dbl loE Clr 6mm/13mm Argon,SouthWall,,0,WinShading,FRAME, 1,autocalculate,
+    726 
+    727 
+    728 -2.773986, -5.513620, 0.460851,
+    729 
+    730 2.773986, -5.513620, 0.460851,
+    731 
+    732 2.773986, -5.513620, 2.339149,
+    733 
+    734 -2.773986, -5.513620, 2.339149;
+    735 
+    736 
+    737 
+    738 FenestrationSurface:Detailed,EastWindow,Window,Dbl loE Clr 6mm/13mm Argon,EastWall,,0,WinShading,FRAME, 1,autocalculate,
+    739 
+    740 
+    741 4.135215, -3.698648, 0.460851,
+    742 
+    743 4.135215, 3.698648, 0.460851,
+    744 
+    745 4.135215, 3.698648, 2.339149,
+    746 
+    747 4.135215, -3.698648, 2.339149;
+    748 
+    749 
+    750 
+    751 FenestrationSurface:Detailed,WestWindow,Window,Dbl loE Clr 6mm/13mm Argon,WestWall,,0,WinShading,FRAME, 1,autocalculate,
+    752 
+    753 
+    754 -4.135215, -3.698648, 0.460851,
+    755 
+    756 -4.135215, -3.698648, 2.339149,
+    757 
+    758 -4.135215, 3.698648, 2.339149,
+    759 
+    760 -4.135215, 3.698648, 0.460851;
+    761 
+    762 
+    763 
+    764 Material,Partition brick,MediumRough,0.003000,0.89,1920,790,,,;
+    765 
+    766 InternalMass,Partitions,Partitions,Main, 145.233471;
+    767 
+    768 Construction, Partitions, Plasterboard, Partition brick, Plasterboard;
+    769 
+    770 Shading:Building,NorthObstacle, 0, 90,6.935215,-8.313620, 0, 13.870429,0.840000;
+    771 
+    772 Shading:Building,SouthObstacle, 180, 90,-6.935215, 8.313620, 0, 13.870429,0.840000;
+    773 
+    774 Shading:Building,EastObstacle, 90, 90,-6.935215,-8.313620, 0, 16.627239,0.840000;
+    775 
+    776 Shading:Building,WestObstacle, 270, 90, 6.935215,8.313620, 0, 16.627239,0.840000;
+    777 
+    778 Schedule:Constant,activity,Activity-limits,80.000000;
+    779 
+    780 People,People,Main,Occupancy Year,People, 5,,, 0,autocalculate,activity, .0000000382,No,ZoneAveraged,,,,,,,,,;
+    781 
+    782 ZoneInfiltration:DesignFlowRate,Infiltration,Main,on,AirChanges/Hour,,,,3.500000, 1,,,;
+    783 
+    784 ElectricEquipment,Electricity, Main, Equipment Year,  Watts/Area, , ,10.000000 , , , , General;
+    785 
+    786 Lights,  Lighting,Main, Lighting Year,Watts/Area, ,5,,0,0,0,1,General,No,,;
+    787 
+    788 ZoneVentilation:WindandStackOpenArea,Natural ventilation1,Main,2.605185,Ventilation year,autocalculate,,1.643510,0.6,21.000000,, 100,,0,,2,, 50,, 20;
+    789 
+    790 ZoneVentilation:WindandStackOpenArea,Natural ventilation2,Main,2.605185,Ventilation year,autocalculate,,1.643510,0.6,21.000000,, 100,,0,,2,, 50,, 20;
+    791 
+    792 ZoneVentilation:WindandStackOpenArea,Natural ventilation3,Main,3.473580,Ventilation year,autocalculate,,1.643510,0.6,21.000000,, 100,,0,,2,, 50,, 20;
+    793 
+    794 ZoneVentilation:WindandStackOpenArea,Natural ventilation4,Main,3.473580,Ventilation year,autocalculate,,1.643510,0.6,21.000000,, 100,,0,,2,, 50,, 20;
+    795 
+    796 Shading:Overhang,ShadeN,NorthWindow,0.01,90,0,0,0.550000;
+    797 
+    798 Shading:Overhang,ShadeS,SouthWindow,0.01,90,0,0,0.550000;
+    799 
+    800 Shading:Overhang,ShadeE,EastWindow,0.01,90,0,0,0.550000;
+    801 
+    802 Shading:Overhang,ShadeW,WestWindow,0.01,90,0,0,0.550000;
+    803 
+    804 Schedule:Compact,HeatingSetpoint,Heating limits,Through: 6/30, For: AllDays, Until: 24:00,21.000000,Through: 8/30, For: AllDays, Until: 24:00, 16,Through: 12/31, For: AllDays, Until: 24:00, 21.000000;
+    805 
+    806 Site:GroundTemperature:BuildingSurface,15.000000,16.000000,17.000000,18.000000,18.000000,18.000000,18.000000,18.000000,18.000000,17.000000,16.000000,15.000000;
+    807 
+  Processing Input Data File (in.idf) -- Complete
+  Maximum number of Alpha IDF Args=          16
+  Maximum number of Numeric IDF Args=          18
+  Number of IDF "Lines"=         125
+  Number of Defaulted Fields=          82
+  Number of Fields with Defaults=         335
+  Number of Autosized Fields=           0
+  Number of Autosizable Fields =           1
+  Number of Autocalculated Fields=          20
+  Number of Autocalculatable Fields =          32
+ Getting object=PROGRAMCONTROL
+ Getting object=VERSION
+ Getting object=HEATBALANCEALGORITHM
+ Getting object=TIMESTEP
+ Getting object=SIMULATIONCONTROL
+ Getting object=OUTPUT:VARIABLEDICTIONARY
+ Getting object=OUTPUT:VARIABLE
+ Getting object=RUNPERIOD
+ Getting object=SITE:GROUNDTEMPERATURE:BUILDINGSURFACE
+ Getting object=SCHEDULE:COMPACT
+  Processing Schedule Input -- Start
+ Getting object=SCHEDULETYPELIMITS
+ Getting object=SCHEDULE:DAY:INTERVAL
+ Getting object=SCHEDULE:WEEK:DAILY
+ Getting object=SCHEDULE:YEAR
+ Getting object=SCHEDULE:CONSTANT
+  Processing Schedule Input -- Complete
+ Getting object=BUILDING
+ Getting object=SURFACECONVECTIONALGORITHM:INSIDE
+ Getting object=SURFACECONVECTIONALGORITHM:OUTSIDE
+ Getting object=ZONEAIRCONTAMINANTBALANCE
+ Getting object=MATERIAL
+ Getting object=MATERIAL:NOMASS
+ Getting object=WINDOWMATERIAL:GLAZING
+ Getting object=WINDOWMATERIAL:GAS
+ Getting object=WINDOWMATERIAL:SHADE
+ Getting object=WINDOWPROPERTY:FRAMEANDDIVIDER
+ Getting object=CONSTRUCTION
+ Getting object=ZONE
+ Getting object=GLOBALGEOMETRYRULES
+ Getting object=SHADING:BUILDING
+ Getting object=BUILDINGSURFACE:DETAILED
+ Getting object=WINDOWPROPERTY:SHADINGCONTROL
+ Getting object=FENESTRATIONSURFACE:DETAILED
+ Getting object=SHADING:OVERHANG
+ Getting object=INTERNALMASS
+ Getting object=PEOPLE
+ Getting object=LIGHTS
+ Getting object=ELECTRICEQUIPMENT
+ Getting object=SHADOWCALCULATION
+ Getting object=DAYLIGHTING:CONTROLS
+ Getting object=ZONEINFILTRATION:DESIGNFLOWRATE
+ Getting object=ZONEVENTILATION:WINDANDSTACKOPENAREA
+ Getting object=ZONECONTROL:THERMOSTAT
+ Getting object=THERMOSTATSETPOINT:SINGLEHEATING
+ Getting object=ZONEHVAC:EQUIPMENTCONNECTIONS
+ Getting object=ZONEHVAC:EQUIPMENTLIST
+ Getting object=ZONEHVAC:BASEBOARD:CONVECTIVE:ELECTRIC
+ Getting object=OUTPUTCONTROL:TABLE:STYLE
+ MonthlyInputCount=           0
+ sizeMonthlyInput=           0
+ MonthlyFieldSetInputCount=           0
+ sizeMonthlyFieldSetInput=           0
+ MonthlyTablesCount=           0
+ MonthlyColumnsCount=           0
+ sizeReportName=         100
+ numReportName=          12
+ sizeSubTable=         100
+ numSubTable=          54
+ sizeColumnTag=         400
+ numColumnTag=         314
+ sizeTableEntry=         600
+ numTableEntry=         544
+ sizeCompSizeTableEntry=         100
+ numCompSizeTableEntry=           1
+ NumOfRVariable=        1411
+ NumOfRVariable(Total)=        1411
+ NumOfRVariable(Actual)=          27
+ NumOfRVariable(Summed)=          13
+ NumOfRVariable(Meter)=          13
+ NumOfIVariable=         107
+ NumOfIVariable(Total)=         107
+ NumOfIVariable(Actual)=           0
+ NumOfIVariable(Summed)=           0
+ MaxRVariable=        1000
+ MaxIVariable=          10
+ NumEnergyMeters=          34
+ NumVarMeterArrays=          13
+ maxUniqueKeyCount=        1500
+ maxNumberOfFigures=           7
+ MAXHCArrayBounds=          10
+ MaxVerticesPerSurface=           4
+ NumReportList=         500
+ InstMeterCacheSize=        1000
+ ClippingAlgorithm=SutherlandHodgman
+ MonthlyFieldSetInputCount=           0
+ NumConsideredOutputVariables=           8
+ MaxConsideredOutputVariables=           8
+ numActuatorsUsed=           0
+ numEMSActuatorsAvailable=           0
+ maxEMSActuatorsAvailable=           0
+ numInternalVariablesUsed=           0
+ numEMSInternalVarsAvailable=           0
+ maxEMSInternalVarsAvailable=           0
+ NumOfNodeConnections=           2
+ MaxNumOfNodeConnections=        1000

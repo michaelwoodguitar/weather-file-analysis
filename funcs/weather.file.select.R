@@ -1,7 +1,7 @@
 weather.file.select = function(file=NULL, fold=NULL){
   
   # the path for the weather files
-  path.w = 'data/weather-files/'
+  path.w = '../../weather-files/' # relative path
   
   # list all of the weather files
   folders = dir(path = path.w)
