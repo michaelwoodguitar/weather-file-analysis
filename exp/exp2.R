@@ -15,8 +15,6 @@ weather.file.select(file = file, fold = fold) # get and set the weather file
 # this first step is just a straight run of the simulator
 outsim = run.simulators(x) 
 delT = outsim$deltaT  
-# plot delta T
-# plot(delT, type='l', col='blue')
 
 # find the areas where deltaT is greater than 0
 delT.hourly= outsim$deltaT[seq(1,length(outsim$deltaT),12)] # 
