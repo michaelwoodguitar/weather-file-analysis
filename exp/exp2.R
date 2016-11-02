@@ -3,14 +3,18 @@
 
 # this is the variables file...
 var.file = 'data/all-variables.xlsx'
-file = 2 # choose the type of weathe file
-fold = 2 # choose the weather file
+file = 7 # choose the type of weathe file
+fold = 1 # choose the weather file
+days.spread = 3
 variables=read.xlsx(var.file, sheetIndex = 1)
 nvar=sum(variables$Vary.)
-x = rep(0.5,nvar)
+x = runif(n = nvar,min = 0, max = 1)
+real.x = cbind(scale.x(x, variables=variables), variables$Vary.)
+colnames(real.x)=c('Value','Varied?')
+rownames(real.x)=gsub('%%','',variables$Name) # these are the real values of x
 
 sim = simulator # normal simulator
-weather.file.select(file = file, fold = fold) # get and set the weather file
+weather.name=weather.file.select(file = file, fold = fold) # get and set the weather file
 
 # this first step is just a straight run of the simulator
 outsim = run.simulators(x) 
@@ -20,10 +24,10 @@ delT = outsim$deltaT
 delT.hourly= outsim$deltaT[seq(1,length(outsim$deltaT),12)] # 
 plot(delT.hourly, type='l', col='blue') # hourly plot
 bin.string = delT.hourly*0
-bin.string[delT.hourly>0] = 1
-days.spread = 3
+bin.string[delT.hourly>0]=1
+
 spread = rep(1,24*days.spread)
-spread = c(seq(0,1, 1/((24*days.spread)/2)), seq(1,0, -1/((24*days.spread)/2)))
+# spread = c(seq(0,1, 1/((24*days.spread)/2)), seq(1,0, -1/((24*days.spread)/2)))
 bin.string.spread = filter(bin.string,spread, sides=2) # convolve strings
 bin.string.spread[bin.string.spread>1]=1
 bin.string.spread[is.na(bin.string.spread)]=0 # get rid of NAs
@@ -38,7 +42,16 @@ display.temps('weather.epw')
 sim=simulator.deconstruct 
 outsim.deconstruct = run.simulators(x) # runs the deconstructed simulator
 
-# plot(delta.samp, col='red', type='l')
+# display the compared results as a table
+res = display.results(outsim, 
+                outsim.deconstruct, 
+                build.design=real.x, 
+                weather.name=weather.name, 
+                warm.up = days.spread)
+save.name = gsub('.epw','.RDS',res$`Weather name`)
 
+save.loc = paste('exp/exp2/', save.name, sep='')
+
+saveRDS(res, file = save.loc)
 
 
