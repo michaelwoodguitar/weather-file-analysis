@@ -16,20 +16,25 @@ remove.low.delT = function(binary.string, plot.TF=F){
   cat('Decomposing the weather file')
   
   # split the temperatures up into residue and imfs
-  V7=emd(weather.dat$V7, max.sift=6, boundary="wave", plot.imf=F)
-  V8=emd(weather.dat$V8, max.sift=6, boundary="wave", plot.imf=F)
+  V7=emd(weather.dat$V7, max.sift=6, boundary="wave", plot.imf=F) # dry bulb
+  V8=emd(weather.dat$V8, max.sift=6, boundary="wave", plot.imf=F) # dew point
 
   # sum the imfs and remove areas of non-interest.
   V7.rm = apply(V7$imf, MARGIN = 1, sum)*binary.string
   V8.rm = apply(V8$imf, MARGIN = 1, sum)*binary.string
 
   # add the results back in
-  weather.dat$V7 = V7$residue #+ V7.rm
-  weather.dat$V8 = V8$residue # + V8.rm
+  weather.dat$V7 = V7$residue + V7.rm
+  weather.dat$V8 = V8$residue + V8.rm # should always be lowest
+  weather.dat$V8[weather.dat$V8>weather.dat$V7] = weather.dat$V7[weather.dat$V8>weather.dat$V7] # this is to get rid of dew point errors
 
   if(plot.TF==T){
-    plot(weather.dat$V7, type='l', col='red', main='Low DelT removed')
+    plot(weather.dat$V7, type='l', 
+         col='red', main='Low DelT removed',
+         ylim=c(-5,40))
     lines(weather.dat$V8, col='blue')
+    lines(weather.dat$V7, col='red')
+    lines(weather.dat$V7-weather.dat$V8, col='black', lty=2)
   }
   
   cat('Done! \n')

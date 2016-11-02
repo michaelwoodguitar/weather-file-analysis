@@ -1,4 +1,4 @@
-Program Version,EnergyPlus-Windows-64 8.1.0.009, YMD=2016.11.01 15:51,IDD_Version 8.1.0.009
+Program Version,EnergyPlus-Windows-64 8.1.0.009, YMD=2016.11.02 08:25,IDD_Version 8.1.0.009
    ** Warning ** ProcessScheduleInput: Schedule:Constant="CONTROLTYPE", Blank Schedule Type Limits Name input -- will not be validated.
    ** Warning ** ProcessScheduleInput: Schedule:Constant="OUTDOOR CO2 SCHEDULE", Blank Schedule Type Limits Name input -- will not be validated.
    ** Warning ** CheckUsedConstructions: There are 3 nominally unused constructions in input.
@@ -27,4 +27,4 @@ Program Version,EnergyPlus-Windows-64 8.1.0.009, YMD=2016.11.01 15:51,IDD_Versio
    *************
    ************* EnergyPlus Warmup Error Summary. During Warmup: 0 Warning; 0 Severe Errors.
    ************* EnergyPlus Sizing Error Summary. During Sizing: 0 Warning; 0 Severe Errors.
-   ************* EnergyPlus Completed Successfully-- 4 Warning; 0 Severe Errors; Elapsed Time=00hr 00min 12.91sec
+   ************* EnergyPlus Completed Successfully-- 4 Warning; 0 Severe Errors; Elapsed Time=00hr 00min 13.86sec
