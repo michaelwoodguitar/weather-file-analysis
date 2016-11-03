@@ -10,6 +10,8 @@ days.spread = 3
 
 # put a for loop in for buildings...
 
+# Building analysis -------------------------------------------------------
+
 for (file in 1:42){ # for each DSY
 
   variables=read.xlsx(var.file, sheetIndex = 1)
@@ -63,3 +65,55 @@ for (file in 1:42){ # for each DSY
   saveRDS(res, file = save.loc)
 
 }
+
+
+
+
+# Analyse results ---------------------------------------------------------
+
+files.loc = 'exp/exp2/'
+
+results.f.names = dir(files.loc, pattern = '*.RDS')
+
+results.all = list()
+no.files = length(results.f.names)
+partial = full = matrix(NA, nrow=no.files, ncol=3)
+colnames(partial) = colnames(full) = c('CIBSE A','CIBSE B','CIBSE C')
+rownames(partial) = rownames(full) = results.f.names
+
+
+for (i in 1:no.files){
+  results.all = readRDS(file = paste(files.loc,results.f.names[i], sep=''))
+  # for each result calculate the percentage difference between the true value and the decomposed value (in %)
+  full[i,] = c(results.all$Comparison[1,])
+  partial[i,] = c(results.all$Comparison[2,])
+}
+
+# process the files
+Place = gsub('(_DSY)([123])(.RDS)', '', rownames(full))
+WeatherFile = rownames(full)
+partial.df = cbind(as.data.frame(partial), Place, WeatherFile, 'Partial')
+full.df = cbind(as.data.frame(full), Place, WeatherFile, 'Full')
+colnames(partial.df)[6] = colnames(full.df)[6] = 'Type of file'
+all.results = rbind(partial.df, full.df)
+
+col.vec = all.results$`Type of file`=='Full'
+
+col.vec[col.vec==T] = 'black'
+col.vec[col.vec==F] = 'grey'
+
+# need to add groups to this.
+dotplot(WeatherFile ~ `CIBSE B`, gcolor=col.vec, data = all.results, pch=18,
+        main = "CIBSE B")
+
+# useful stack overflow article
+ggplot(data = all.results, aes(x = `CIBSE A`, y = WeatherFile,  color=`Type of file`)) +
+  geom_line(data=all.results, aes(x=`CIBSE A`, y=WeatherFile, group=WeatherFile)) +
+  geom_point() +
+  theme_minimal()
+
+mg <- ggplot(mtcars, aes(x = mpg, y = wt)) + geom_point()
+mg + facet_grid(vs + am ~ gear)
+mg + facet_grid(vs + am ~ gear, margins = TRUE)
+mg + facet_grid(vs + am ~ gear, margins = "am")
+

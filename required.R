@@ -9,6 +9,8 @@ library(EMD)
 library(hht)
 library(BMS)
 library(GA)
+library(lattice)
+library(ggplot2)
 
 # source the required function
 sourceDir <- function(path, trace = T, ...) {
