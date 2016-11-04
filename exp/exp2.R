@@ -92,28 +92,35 @@ for (i in 1:no.files){
 # process the files
 Place = gsub('(_DSY)([123])(.RDS)', '', rownames(full))
 WeatherFile = rownames(full)
-partial.df = cbind(as.data.frame(partial), Place, WeatherFile, 'Partial')
-full.df = cbind(as.data.frame(full), Place, WeatherFile, 'Full')
+`DSY Type` = gsub("^.*DSY","", WeatherFile)
+`DSY Type` = gsub(".RDS","", `DSY Type`)
+partial.df = cbind(as.data.frame(partial), Place, WeatherFile, 'Partial', `DSY Type`)
+full.df = cbind(as.data.frame(full), Place, WeatherFile, 'Full', `DSY Type`)
 colnames(partial.df)[6] = colnames(full.df)[6] = 'Type of file'
+
 all.results = rbind(partial.df, full.df)
+all.results$`CIBSE A` = all.results$`CIBSE A`*100 # make CIBSE A a percentage rather than a ratio
 
-col.vec = all.results$`Type of file`=='Full'
 
-col.vec[col.vec==T] = 'black'
-col.vec[col.vec==F] = 'grey'
+ggplot(data = all.results, aes(x = `CIBSE A`, y = Place,  color=`Type of file`, shape=`DSY Type`)) +
+  geom_line(data=all.results, aes(x=`CIBSE A`, y = Place, group=WeatherFile)) +
+  geom_point() + 
+  labs(x = "CIBSE A: % of occupied hours \n where deltaT > 1") + 
+  labs(y = "Design summer year location") + 
+  theme_linedraw()
 
-# need to add groups to this.
-dotplot(WeatherFile ~ `CIBSE B`, gcolor=col.vec, data = all.results, pch=18,
-        main = "CIBSE B")
-
-# useful stack overflow article
-ggplot(data = all.results, aes(x = `CIBSE A`, y = WeatherFile,  color=`Type of file`)) +
-  geom_line(data=all.results, aes(x=`CIBSE A`, y=WeatherFile, group=WeatherFile)) +
+ggplot(data = all.results, aes(x = `CIBSE B`, y = Place,  color=`Type of file`, shape=`DSY Type`)) +
+  geom_line(data=all.results, aes(x=`CIBSE B`, y = Place, group=WeatherFile)) +
   geom_point() +
-  theme_minimal()
+  labs(x = "CIBSE B: Maximum weighted exceedance on \na given day") + 
+  labs(y = "Design summer year location") + 
+  theme_linedraw()
 
-mg <- ggplot(mtcars, aes(x = mpg, y = wt)) + geom_point()
-mg + facet_grid(vs + am ~ gear)
-mg + facet_grid(vs + am ~ gear, margins = TRUE)
-mg + facet_grid(vs + am ~ gear, margins = "am")
+ggplot(data = all.results, aes(x = `CIBSE C`, y = Place,  color=`Type of file`, shape=`DSY Type`)) +
+  geom_line(data=all.results, aes(x=`CIBSE C`, y = Place, group=WeatherFile)) +
+  geom_point() +
+  labs(x = "CIBSE C: Maximum value of deltaT") + 
+  labs(y = "Design summer year location") + 
+  theme_linedraw()
+
 
