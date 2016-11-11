@@ -11,6 +11,7 @@ library(BMS)
 library(GA)
 library(lattice)
 library(ggplot2)
+library(DiceDesign)
 
 # source the required function
 sourceDir <- function(path, trace = T, ...) {

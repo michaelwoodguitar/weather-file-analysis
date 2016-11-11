@@ -12,14 +12,14 @@ weather.file.select = function(file=NULL, fold=NULL){
     files[[i]] = dir(path = paste(path.w, folders[i], sep=''), pattern = '*.epw')
   }
   
-  print(folders)
  if (is.null(fold)){ 
+  print(folders)
   fold = as.numeric(readline(prompt="Select folder by number: "))
  } 
-  print(dir(path = paste(path.w, folders[fold], sep=''), pattern = '*.epw'))
  
   
    if (is.null(file)){  
+    print(dir(path = paste(path.w, folders[fold], sep=''), pattern = '*.epw'))
     file = as.numeric(readline(prompt ="Select file by number:"))
    } 
    
@@ -32,18 +32,10 @@ weather.file.select = function(file=NULL, fold=NULL){
   setwd(curr) # go back to the current directory
 
   weather.loc = paste(source,weather.file.address, sep='')  
-  cat(paste('copying from', weather.loc, 'to', getwd()), '\n')
   
   success = file.copy(from = weather.loc,
                       to = getwd(), overwrite = T)
   
-  if (success==T){
-    cat('success!\n')
-  } else {
-    cat('problem with copying weather file.\n')
-  }
-  
-  # delete weather.epw
   if (file.exists('weather.epw')){
     file.remove('weather.epw')
   }

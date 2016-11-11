@@ -1,0 +1,168 @@
+---
+title: "Weather file decomposition analysis"
+output:
+  pdf_document: default
+  html_notebook: default
+---
+
+```{r echo=F}
+# source libraries and function
+source('required.R')
+
+```
+
+
+## Hilbert Huang decomposition basics
+
+Here's my quick review of what we've done so far. 
+
+We started by decomposing the weather file using the Hilbert Huang empirical mode decomposition (EMD). If you're not familiar with the method, watch this talk by Norbert Huang:
+
+<iframe width="480" height="360" frameborder="0" src="http://cds.cern.ch/video/CERN-VIDEO-C-559?showTitle=true" allowfullscreen></iframe>
+
+Assuming you understand all that, I'll go on...
+
+The EMD creates decomposes a time domain signal into a *residual* and a several *intrinsic mode functions* (IMFs). If we add up all IMFs and the residual, we get the original signal. 
+
+Here's an example of an residue of an EMD analysis with the original temperature trace (outdoor dry bulb).
+
+```{r echo=T}
+ # emd analysis for one of the weather files
+  fileName="../../weather-files/DSY/Norwich_DSY3.epw"
+  connection=file(fileName,open="r")
+  header=readLines(connection)[1:8] 
+  weather.dat = read.table(fileName, skip = 8, header = FALSE, sep =',')
+  close(connection)
+  decomp=emd(weather.dat$V7, max.sift=6, boundary="wave", plot.imf=F)
+  temp.lims = c(-10,35)
+  plot(decomp$residue, main='Residue', type='l', lwd=3, ylim=temp.lims, ylab='hour', xlab='temp')
+  plot(weather.dat$V7, main='Total', type='l', col='red', lwd='red', ylim=temp.lims)
+```
+
+The IMFs then constitute the 'noise' that is added on top. The IMFs increase in 'frequency' with index:
+
+```{r}
+for (i in 1:ncol(decomp$imf)){
+  plot(decomp$imf[,i], type='l', col='blue', lwd=3, xlab='hour', ylab='temp', main=paste('IMF', i))
+}
+```
+
+What we've done with this is unsophisticated, but interesting. We've took the residue:
+
+```{r}
+plot(decomp$residue, main='Residue / Trend', type='l', lwd=3, ylim=temp.lims, ylab='hour', xlab='temp')
+```
+
+And the sum of **all** the IMFs:
+
+```{r}
+sum.imfs = apply(decomp$imf, MARGIN = 1, FUN = sum)
+plot(sum.imfs, type='l', col='blue', lwd=3, xlab='hour', ylab='temp', main=paste('The rest'))
+```
+
+To reduce the size of the weather file, we've been adding the *residue* to *the rest*, but only taking out certain chunks:
+
+```{r}
+index = rep(0, length(decomp$residue))
+index[3000:4000]=1 # imf chunk select index
+plot(decomp$residue+sum.imfs*index, type='l', col='blue', lwd=3, xlab='hour', ylab='temp', main=paste('The rest'))
+sum.imfs
+```
+
+Our hypothesis is that most of the weather file is useless for overheating. The question is, which bits are useful and which bits are useless?
+
+## CIBSE TM 52 overheating criteria
+
+We've been using the CIBSE TM 52 overheating criteria to calculate overheating. You all probably know those calculations better than me - they're  based on $\Delta T$, which is the difference between the operational temperature $T_{op}$ and $T_{max}$:
+
+$$ \Delta T = T_{op} - T_{max} $$
+And:
+
+$$ T_{max} = 0.33 T_{rm} + 21.8 $$
+
+Where $T_{rm}$ is the running mean. 
+
+The CIBSE criteria are:
+
+- A. Number of hours where $\Delta T$ is greater than 1 should be less than 3% of occupied hours
+- B. The maximum weighed exceedance should be less than 6 on *any* day.
+- C. $\Delta T$ should never be greater than 4. 
+
+Both A and C are obviously based on $\Delta T$, but so is B. It therefore seems illogical to include areas of the weather file where $\Delta T$ is likely to be less than 0. 
+
+To test this, we designed a little experiment. 
+
+We ran a *full* year of weather through a random building to calculated CIBSE A, B and C. We also calculated $\Delta T$ on every timestep. 
+
+We then took the *full* weather year and took out the IMF 'noise' when $\Delta T$ was less than 0. We also left a 3-day run up and run down either side. This *decomposed* weather was then ran through the building.
+
+We found that the results for the CIBSE criteria were almost identical:
+
+```{r}
+files.loc = 'exp/exp2/'
+
+results.f.names = dir(files.loc, pattern = '*.RDS')
+
+results.all = list()
+no.files = length(results.f.names)
+partial = full = matrix(NA, nrow=no.files, ncol=3)
+colnames(partial) = colnames(full) = c('CIBSE A','CIBSE B','CIBSE C')
+rownames(partial) = rownames(full) = results.f.names
+
+sample.result = readRDS(file = paste(files.loc,results.f.names[2], sep=''))
+kable(sample.result$Comparison, digits=2)
+```
+
+As you'd expect the results vary for different files and different building types. We tested different building types with different weather files and compared the results. The dot plot below shows the differences between the full and partial weather files for each location, and for each of the three *new* DSYs:
+
+```{r}
+for (i in 1:no.files){
+  results.all = readRDS(file = paste(files.loc,results.f.names[i], sep=''))
+  # for each result calculate the percentage difference between the true value and the decomposed value (in %)
+  full[i,] = c(results.all$Comparison[1,])
+  partial[i,] = c(results.all$Comparison[2,])
+}
+
+# process the files
+Place = gsub('(_DSY)([123])(.RDS)', '', rownames(full))
+WeatherFile = rownames(full)
+`DSY Type` = gsub("^.*DSY","", WeatherFile)
+`DSY Type` = gsub(".RDS","", `DSY Type`)
+partial.df = cbind(as.data.frame(partial), Place, WeatherFile, 'Partial', `DSY Type`)
+full.df = cbind(as.data.frame(full), Place, WeatherFile, 'Full', `DSY Type`)
+colnames(partial.df)[6] = colnames(full.df)[6] = 'Type of file'
+
+all.results = rbind(partial.df, full.df)
+all.results$`CIBSE A` = all.results$`CIBSE A`*100 # make CIBSE A a percentage rather than a ratio
+
+
+ggplot(data = all.results, aes(x = `CIBSE A`, y = Place,  color=`Type of file`, shape=`DSY Type`)) +
+  geom_line(data=all.results, aes(x=`CIBSE A`, y = Place, group=WeatherFile)) +
+  geom_point() + 
+  labs(x = "CIBSE A: % of occupied hours \n where deltaT > 1") + 
+  labs(y = "Design summer year location") + 
+  theme_linedraw()
+
+ggplot(data = all.results, aes(x = `CIBSE B`, y = Place,  color=`Type of file`, shape=`DSY Type`)) +
+  geom_line(data=all.results, aes(x=`CIBSE B`, y = Place, group=WeatherFile)) +
+  geom_point() +
+  labs(x = "CIBSE B: Maximum weighted exceedance on \na given day") + 
+  labs(y = "Design summer year location") + 
+  theme_linedraw()
+
+ggplot(data = all.results, aes(x = `CIBSE C`, y = Place,  color=`Type of file`, shape=`DSY Type`)) +
+  geom_line(data=all.results, aes(x=`CIBSE C`, y = Place, group=WeatherFile)) +
+  geom_point() +
+  labs(x = "CIBSE C: Maximum value of deltaT") + 
+  labs(y = "Design summer year location") + 
+  theme_linedraw()
+```
+
+We need to do more work to validate the results and find out  and I'd like to be able to 
+
+
+
+
+
+
+
