@@ -71,7 +71,6 @@ for (file in 1:42){ # for each DSY
 
 
 # Analyse results ---------------------------------------------------------
-
 files.loc = 'exp/exp2/'
 
 results.f.names = dir(files.loc, pattern = '*.RDS')

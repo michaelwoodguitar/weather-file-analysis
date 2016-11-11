@@ -1,0 +1,104 @@
+---
+title: "Weather file decomposition analysis: update 2"
+output:
+  html_notebook: default
+  html_document: default
+  pdf_document: default
+---
+
+```{r echo=F, message=F}
+# source libraries and function
+source('../required.R')
+
+```
+
+Here's an update on this weeks work. 
+
+You'll remember these graphs:
+
+```{r echo=F}
+# Analyse results ---------------------------------------------------------
+files.loc = '../exp/exp2/'
+
+results.f.names = dir(files.loc, pattern = '*.RDS')
+
+results.all = list()
+no.files = length(results.f.names)
+partial = full = matrix(NA, nrow=no.files, ncol=3)
+colnames(partial) = colnames(full) = c('CIBSE A','CIBSE B','CIBSE C')
+rownames(partial) = rownames(full) = results.f.names
+
+
+for (i in 1:no.files){
+  results.all = readRDS(file = paste(files.loc,results.f.names[i], sep=''))
+  # for each result calculate the percentage difference between the true value and the decomposed value (in %)
+  full[i,] = c(results.all$Comparison[1,])
+  partial[i,] = c(results.all$Comparison[2,])
+}
+
+# process the files
+Place = gsub('(_DSY)([123])(.RDS)', '', rownames(full))
+WeatherFile = rownames(full)
+`DSY Type` = gsub("^.*DSY","", WeatherFile)
+`DSY Type` = gsub(".RDS","", `DSY Type`)
+partial.df = cbind(as.data.frame(partial), Place, WeatherFile, 'Partial', `DSY Type`)
+full.df = cbind(as.data.frame(full), Place, WeatherFile, 'Full', `DSY Type`)
+colnames(partial.df)[6] = colnames(full.df)[6] = 'Type of file'
+
+all.results = rbind(partial.df, full.df)
+all.results$`CIBSE A` = all.results$`CIBSE A`*100 # make CIBSE A a percentage rather than a ratio
+
+
+ggplot(data = all.results, aes(x = `CIBSE A`, y = Place,  color=`Type of file`, shape=`DSY Type`)) +
+  geom_line(data=all.results, aes(x=`CIBSE A`, y = Place, group=WeatherFile)) +
+  geom_point() + 
+  labs(x = "CIBSE A: % of occupied hours \n where deltaT > 1") + 
+  labs(y = "Design summer year location") + 
+  theme_linedraw()
+
+ggplot(data = all.results, aes(x = `CIBSE B`, y = Place,  color=`Type of file`, shape=`DSY Type`)) +
+  geom_line(data=all.results, aes(x=`CIBSE B`, y = Place, group=WeatherFile)) +
+  geom_point() +
+  labs(x = "CIBSE B: Maximum weighted exceedance on \na given day") + 
+  labs(y = "Design summer year location") + 
+  theme_linedraw()
+
+ggplot(data = all.results, aes(x = `CIBSE C`, y = Place,  color=`Type of file`, shape=`DSY Type`)) +
+  geom_line(data=all.results, aes(x=`CIBSE C`, y = Place, group=WeatherFile)) +
+  geom_point() +
+  labs(x = "CIBSE C: Maximum value of deltaT") + 
+  labs(y = "Design summer year location") + 
+  theme_linedraw()
+```
+
+You'll see that most of the *partial* and *full* weather files are very close to each other for *most* locations. This shows that we can throw away most of the weather files. 
+
+**However**, these results are generated based on random buildings. (the buildings are the same between direct comparisons, but not between locations) - so the graphs are complete, but they *do* show that excluding large sections of the weather file using $\Delta T > 0$ works. The question now becomes - how do the excluded sections differ between *building* types? This is what I've looked at this week:
+
+The graphs below are generated from 30 random buildings. The black lines are where $\Delta T$ is greater than 0:
+
+### Belfast DSY1
+
+```{r fig.cap='Belfast DSY1', echo=F}
+results.loc = paste('../exp/exp3/')
+results.f.names = paste(results.loc, dir(results.loc, pattern = '*.RDS'), sep='')
+make.plot.exp3(results.f.names, 'DSY1')
+```
+
+### Belfast DSY2
+
+```{r echo=F}
+make.plot.exp3(results.f.names, 'DSY2')
+```
+
+
+The graphs show that the areas where $\Delta T$ were greater than 0 are common across all the buildings. This looks promising, but may be too good to be true. We need to investigate this further and across more buildings. If true, we have a good method for identifying heatwaves that will test all buildings. 
+
+I'd be interested to hear what you think.
+
+
+
+
+
+
+

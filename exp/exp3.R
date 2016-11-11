@@ -11,7 +11,7 @@ days.spread = 3
 # put a for loop in for buildings...
 
 # Building analysis -------------------------------------------------------
-no.buildings = 10
+no.buildings = 30
 variables=read.xlsx(var.file, sheetIndex = 1)
 nvar=sum(variables$Vary.)
 # x = runif(n = nvar,min = 0, max = 1)
@@ -79,36 +79,10 @@ saveRDS(x, file = paste(save.folder, 'building.configs/building configurations.R
 
 
 # Analyse results ---------------------------------------------------------
-
 results.f.names = paste(save.folder, dir(save.folder, pattern = '*.RDS'), sep='')
-
-results.all = list()
-no.files = length(results.f.names)
-# create the empty matrix
-included.hours = list()
-
-# for each file, extract the deltaT
-for (i in 1:no.files){
- temp.dat = readRDS(file = results.f.names[i])
- bin.vec = temp.dat$`Delta T`>0
- # do the convolution bit
- spread = rep(1,24*days.spread)
- # spread = c(seq(0,1, 1/((24*days.spread)/2)), seq(1,0, -1/((24*days.spread)/2)))
- bin.string.spread = filter(bin.vec,spread, sides=2) # convolve strings
- bin.string.spread[bin.string.spread>0]=1
- bin.string.spread[is.na(bin.string.spread)]=0 # get rid of NAs
- included.hours[[i]] = which(bin.string.spread==1)
-}
-
-# plot all the included hours as a ticker trace style
-
-plot(included.hours[[1]],rep(1, length(included.hours[[1]])), pch='.', 
-     ylim=c(0, no.files), xlim=c(0,8760),
-     xlab='Hour', ylab='Building ID')
-
-for (i in 2:no.files){
-  points(included.hours[[i]],rep(i, length(included.hours[[i]])), pch='.', col=i)
-}
+make.plot.exp3(results.f.names, 'DSY1')
+make.plot.exp3(results.f.names, 'DSY2')
+make.plot.exp3(results.f.names, 'DSY3')
 
 
 
