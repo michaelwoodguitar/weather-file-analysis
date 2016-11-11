@@ -2,7 +2,7 @@
 # ====================================
 
 # this is the variables file...
-var.file = 'data/all-variables.xlsx'
+var.file = 'data/all-variables-exp3.xlsx'
 # file = 7 # choose the type of weathe file
 fold = 1 # folder 1 is DSY, folder 2 is TRY
 days.spread = 3
@@ -58,7 +58,8 @@ for (building in 1:no.buildings){ # for each building
         outsim.deconstruct = run.simulators(x) # runs the deconstructed simulator
         
         # display the compared results as a table
-        res = display.results(outsim, 
+        res = display.results(delT.hourly,
+                              outsim, 
                               outsim.deconstruct, 
                               build.design=real.x, 
                               weather.name=weather.name, 
