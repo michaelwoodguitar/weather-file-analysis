@@ -11,7 +11,7 @@ days.spread = 3
 # put a for loop in for buildings...
 
 # Building analysis -------------------------------------------------------
-no.buildings = 2
+no.buildings = 10
 variables=read.xlsx(var.file, sheetIndex = 1)
 nvar=sum(variables$Vary.)
 # x = runif(n = nvar,min = 0, max = 1)

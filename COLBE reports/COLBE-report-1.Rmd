@@ -8,7 +8,7 @@ output:
 
 ```{r echo=F, message=F}
 # source libraries and function
-source('required.R')
+source('../required.R')
 
 ```
 
@@ -27,7 +27,7 @@ The EMD reduces a signal to a *residual* and a several *intrinsic mode functions
 
 ```{r echo=T}
  # emd analysis for one of the weather files
-  fileName="../../weather-files/DSY/Norwich_DSY3.epw"
+  fileName="../../../weather-files/DSY/Norwich_DSY3.epw"
   connection=file(fileName,open="r")
   header=readLines(connection)[1:8] 
   weather.dat = read.table(fileName, skip = 8, header = FALSE, sep =',')
@@ -101,7 +101,7 @@ We then took the full weather year and removed the IMF 'noise' where $\Delta T$ 
 We found that the results for the CIBSE criteria were almost identical:
 
 ```{r}
-files.loc = 'exp/exp2/'
+files.loc = '../exp/exp2/'
 
 results.f.names = dir(files.loc, pattern = '*.RDS')
 

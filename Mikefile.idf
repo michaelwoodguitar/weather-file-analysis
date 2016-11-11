@@ -607,18 +607,18 @@ Output:Variable,*,Site Outdoor Air Drybulb Temperature ,Timestep;
 Output:Variable,*,Site Direct Solar Radiation Rate per Area ,Timestep;
 
 
-ZoneHVAC:Baseboard:Convective:Electric,Electric heater,Occupancy binary year,10965.068544,1;
+ZoneHVAC:Baseboard:Convective:Electric,Electric heater,Occupancy binary year,7326.913270,1;
 
-Material,Tiles,MediumRough,0.0127,0.84,1900,800,,0.516754,;
-
-
-Material,Concrete,MediumRough,0.065086,1.4,2100,840,,,;
+Material,Tiles,MediumRough,0.0127,0.84,1900,800,,0.800414,;
 
 
-Material,InsulationWalls,MediumRough,0.058137,0.03,43,1210,,,;
+Material,Concrete,MediumRough,0.191178,1.4,2100,840,,,;
 
 
-Material,InsulationRoof,MediumRough,0.060555,0.03,43,1210,,,;
+Material,InsulationWalls,MediumRough,0.069027,0.03,43,1210,,,;
+
+
+Material,InsulationRoof,MediumRough,0.054697,0.03,43,1210,,,;
 Material,M01 100mm brick,MediumRough,0.1016,0.89,1920,790,,,;
 
 WindowMaterial:Glazing,CLEAR 6MM,SpectralAverage,,0.006,0.775,0.071,0.071,0.881,0.080,0.080,0.0,0.84,0.84,0.9,,,,;
@@ -632,78 +632,78 @@ WindowMaterial:Glazing,LoE CLEAR 6MM,SpectralAverage,,0.006,0.630,0.220,0.190,0.
 BuildingSurface:Detailed,Floor,floor,floorConstruction,Main,Ground,,NoSun,NoWind,autocalculate,autocalculate,
 
 
--3.578602, 6.371203, 0.000000,
+-4.097095, 5.564919, 0.000000,
 
-3.578602, 6.371203, 0.000000,
+4.097095, 5.564919, 0.000000,
 
-3.578602, -6.371203, 0.000000,
+4.097095, -5.564919, 0.000000,
 
--3.578602, -6.371203, 0.000000;
+-4.097095, -5.564919, 0.000000;
 
 
 
 BuildingSurface:Detailed,Roof,Roof,roofConstruction,Main,outdoors,,SunExposed,windExposed,autocalculate,autocalculate,
 
 
--3.578602, -6.371203, 2.800000,
+-4.097095, -5.564919, 2.800000,
 
-3.578602, -6.371203, 2.800000,
+4.097095, -5.564919, 2.800000,
 
-3.578602, 6.371203, 2.800000,
+4.097095, 5.564919, 2.800000,
 
--3.578602, 6.371203, 2.800000;
+-4.097095, 5.564919, 2.800000;
 
 
 
 BuildingSurface:Detailed,NorthWall,wall,WallConstruction,Main,outdoors,,SunExposed,windExposed,0,autocalculate,
 
 
-3.578602, 6.371203, 0.000000,
+4.097095, 5.564919, 0.000000,
 
--3.578602, 6.371203, 0.000000,
+-4.097095, 5.564919, 0.000000,
 
--3.578602, 6.371203, 2.800000,
+-4.097095, 5.564919, 2.800000,
 
-3.578602, 6.371203, 2.800000;
+4.097095, 5.564919, 2.800000;
 
 
 
 BuildingSurface:Detailed,SouthWall,wall,WallConstruction,Main,outdoors,,SunExposed,windExposed,0,autocalculate,
 
 
--3.578602, -6.371203, 0.000000,
+-4.097095, -5.564919, 0.000000,
 
-3.578602, -6.371203, 0.000000,
+4.097095, -5.564919, 0.000000,
 
-3.578602, -6.371203, 2.800000,
+4.097095, -5.564919, 2.800000,
 
--3.578602, -6.371203, 2.800000;
+-4.097095, -5.564919, 2.800000;
 
 
 
 BuildingSurface:Detailed,EastWall,wall,WallConstruction,Main,outdoors,,SunExposed,windExposed,0,autocalculate,
 
 
-3.578602, -6.371203, 0.000000,
+4.097095, -5.564919, 0.000000,
 
-3.578602, 6.371203, 0.000000,
+4.097095, 5.564919, 0.000000,
 
-3.578602, 6.371203, 2.800000,
+4.097095, 5.564919, 2.800000,
 
-3.578602, -6.371203, 2.800000;
+4.097095, -5.564919, 2.800000;
 
 
 
 BuildingSurface:Detailed,WestWall,wall,WallConstruction,Main,outdoors,,SunExposed,windExposed,0,autocalculate,
 
 
--3.578602, -6.371203, 0.000000,
+-4.097095, -5.564919, 0.000000,
 
--3.578602, -6.371203, 2.800000,
+-4.097095, -5.564919, 2.800000,
 
--3.578602, 6.371203, 2.800000,
+-4.097095, 5.564919, 2.800000,
 
--3.578602, 6.371203, 0.000000;
+-4.097095, 5.564919, 0.000000;
 
 
 
@@ -712,94 +712,94 @@ WindowProperty:ShadingControl,WinShading,InteriorShade,,OnIfHighOutdoorAirTemper
 FenestrationSurface:Detailed,NorthWindow,Window,Dbl loE Clr 6mm/13mm Argon,NorthWall,,0,WinShading,FRAME, 1,autocalculate,
 
 
-2.782714, 6.371203, 0.311363,
+1.547919, 5.564919, 0.871068,
 
--2.782714, 6.371203, 0.311363,
+-1.547919, 5.564919, 0.871068,
 
--2.782714, 6.371203, 2.488637,
+-1.547919, 5.564919, 1.928932,
 
-2.782714, 6.371203, 2.488637;
+1.547919, 5.564919, 1.928932;
 
 
 
 FenestrationSurface:Detailed,SouthWindow,Window,Dbl loE Clr 6mm/13mm Argon,SouthWall,,0,WinShading,FRAME, 1,autocalculate,
 
 
--1.792682, -6.371203, 0.698677,
+-3.583693, -5.564919, 0.175432,
 
-1.792682, -6.371203, 0.698677,
+3.583693, -5.564919, 0.175432,
 
-1.792682, -6.371203, 2.101323,
+3.583693, -5.564919, 2.624568,
 
--1.792682, -6.371203, 2.101323;
+-3.583693, -5.564919, 2.624568;
 
 
 
 FenestrationSurface:Detailed,EastWindow,Window,Dbl loE Clr 6mm/13mm Argon,EastWall,,0,WinShading,FRAME, 1,autocalculate,
 
 
-3.578602, -1.236334, 1.128330,
+4.097095, -3.794350, 0.445433,
 
-3.578602, 1.236334, 1.128330,
+4.097095, 3.794350, 0.445433,
 
-3.578602, 1.236334, 1.671670,
+4.097095, 3.794350, 2.354567,
 
-3.578602, -1.236334, 1.671670;
+4.097095, -3.794350, 2.354567;
 
 
 
 FenestrationSurface:Detailed,WestWindow,Window,Dbl loE Clr 6mm/13mm Argon,WestWall,,0,WinShading,FRAME, 1,autocalculate,
 
 
--3.578602, -4.959503, 0.310205,
+-4.097095, -3.090920, 0.622399,
 
--3.578602, -4.959503, 2.489795,
+-4.097095, -3.090920, 2.177601,
 
--3.578602, 4.959503, 2.489795,
+-4.097095, 3.090920, 2.177601,
 
--3.578602, 4.959503, 0.310205;
+-4.097095, 3.090920, 0.622399;
 
 
 
-Material,Partition brick,MediumRough,0.002909,0.89,1920,790,,,;
+Material,Partition brick,MediumRough,0.003816,0.89,1920,790,,,;
 
-InternalMass,Partitions,Partitions,Main, 146.918908;
+InternalMass,Partitions,Partitions,Main, 145.307276;
 
 Construction, Partitions, Plasterboard, Partition brick, Plasterboard;
 
-Shading:Building,NorthObstacle, 0, 90,6.378602,-9.171203, 0, 12.757204,0.840000;
+Shading:Building,NorthObstacle, 0, 90,6.897095,-8.364919, 0, 13.794190,0.840000;
 
-Shading:Building,SouthObstacle, 180, 90,-6.378602, 9.171203, 0, 12.757204,0.840000;
+Shading:Building,SouthObstacle, 180, 90,-6.897095, 8.364919, 0, 13.794190,0.840000;
 
-Shading:Building,EastObstacle, 90, 90,-6.378602,-9.171203, 0, 18.342406,0.840000;
+Shading:Building,EastObstacle, 90, 90,-6.897095,-8.364919, 0, 16.729837,0.840000;
 
-Shading:Building,WestObstacle, 270, 90, 6.378602,9.171203, 0, 18.342406,0.840000;
+Shading:Building,WestObstacle, 270, 90, 6.897095,8.364919, 0, 16.729837,0.840000;
 
 Schedule:Constant,activity,Activity-limits,80.000000;
 
 People,People,Main,Occupancy Year,People, 5,,, 0,autocalculate,activity, .0000000382,No,ZoneAveraged,,,,,,,,,;
 
-ZoneInfiltration:DesignFlowRate,Infiltration,Main,on,AirChanges/Hour,,,,1.353419, 1,,,;
+ZoneInfiltration:DesignFlowRate,Infiltration,Main,on,AirChanges/Hour,,,,1.366433, 1,,,;
 
-ElectricEquipment,Electricity, Main, Equipment Year,  Watts/Area, , ,10.802994 , , , , General;
+ElectricEquipment,Electricity, Main, Equipment Year,  Watts/Area, , ,10.042795 , , , , General;
 
 Lights,  Lighting,Main, Lighting Year,Watts/Area, ,5,,0,0,0,1,General,No,,;
 
-ZoneVentilation:WindandStackOpenArea,Natural ventilation1,Main,3.029365,Ventilation year,autocalculate,,1.905115,0.6,21.000000,, 100,,0,,2,, 50,, 20;
+ZoneVentilation:WindandStackOpenArea,Natural ventilation1,Main,0.818745,Ventilation year,autocalculate,,0.925632,0.6,21.000000,, 100,,0,,2,, 50,, 20;
 
-ZoneVentilation:WindandStackOpenArea,Natural ventilation2,Main,1.257248,Ventilation year,autocalculate,,1.227315,0.6,21.000000,, 100,,0,,2,, 50,, 20;
+ZoneVentilation:WindandStackOpenArea,Natural ventilation2,Main,4.388474,Ventilation year,autocalculate,,2.142993,0.6,21.000000,, 100,,0,,2,, 50,, 20;
 
-ZoneVentilation:WindandStackOpenArea,Natural ventilation3,Main,0.335875,Ventilation year,autocalculate,,0.475423,0.6,21.000000,, 100,,0,,2,, 50,, 20;
+ZoneVentilation:WindandStackOpenArea,Natural ventilation3,Main,3.621963,Ventilation year,autocalculate,,1.670493,0.6,21.000000,, 100,,0,,2,, 50,, 20;
 
-ZoneVentilation:WindandStackOpenArea,Natural ventilation4,Main,5.404841,Ventilation year,autocalculate,,1.907141,0.6,21.000000,, 100,,0,,2,, 50,, 20;
+ZoneVentilation:WindandStackOpenArea,Natural ventilation4,Main,2.403504,Ventilation year,autocalculate,,1.360802,0.6,21.000000,, 100,,0,,2,, 50,, 20;
 
-Shading:Overhang,ShadeN,NorthWindow,0.01,90,0,0,0.403635;
+Shading:Overhang,ShadeN,NorthWindow,0.01,90,0,0,0.741125;
 
-Shading:Overhang,ShadeS,SouthWindow,0.01,90,0,0,0.641892;
+Shading:Overhang,ShadeS,SouthWindow,0.01,90,0,0,0.160746;
 
-Shading:Overhang,ShadeE,EastWindow,0.01,90,0,0,0.342298;
+Shading:Overhang,ShadeE,EastWindow,0.01,90,0,0,0.219252;
 
-Shading:Overhang,ShadeW,WestWindow,0.01,90,0,0,0.716898;
+Shading:Overhang,ShadeW,WestWindow,0.01,90,0,0,0.656793;
 
 Schedule:Compact,HeatingSetpoint,Heating limits,Through: 6/30, For: AllDays, Until: 24:00,21.000000,Through: 8/30, For: AllDays, Until: 24:00, 16,Through: 12/31, For: AllDays, Until: 24:00, 21.000000;
 
