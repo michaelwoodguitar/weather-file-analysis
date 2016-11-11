@@ -53,7 +53,8 @@ for (file in 1:42){ # for each DSY
   outsim.deconstruct = run.simulators(x) # runs the deconstructed simulator
   
   # display the compared results as a table
-  res = display.results(outsim, 
+  res = display.results(delT.hourly,
+                        outsim, 
                   outsim.deconstruct, 
                   build.design=real.x, 
                   weather.name=weather.name, 

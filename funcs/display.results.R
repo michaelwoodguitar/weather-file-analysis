@@ -1,4 +1,5 @@
-display.results = function(full.weather, 
+display.results = function(delT.hourly,
+                           full.weather, 
                            partial.weather, 
                            build.design,
                            weather.name, 
@@ -12,8 +13,8 @@ display.results = function(full.weather,
   
  
   
-  o = list(build.design, weather.name, tbl, warm.up)
-  names(o) = c('Building design','Weather name', 'Comparison','Warm up days')
+  o = list(delT.hourly, build.design, weather.name, tbl, warm.up)
+  names(o) = c('Delta T','Building design','Weather name', 'Comparison','Warm up days')
   
   return(o)
 }
