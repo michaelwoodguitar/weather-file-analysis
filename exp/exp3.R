@@ -18,9 +18,8 @@ nvar=sum(variables$Vary.)
 x = lhsDesign(n = no.buildings, dimension = nvar, randomized = T)$design # is is x$design[i,] for each individual design...
 save.folder = 'exp/exp3/'
 # note that there are 42 DSY in my wather file folder to be analysed. 
-
   
-for (file in 1:2){ # for each weather file (DSY type and location)
+for (file in 1:42){ # for each weather file (DSY type and location)
         
     for (building in 1:no.buildings){ # for each building
       
