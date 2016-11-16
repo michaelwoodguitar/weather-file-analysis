@@ -12,7 +12,7 @@ make.plot.exp3 = function(results.f.names,
   
   # results.f.names[DSY.match]
   results.all = list()
-  included.hours = list()
+  all.temp.data = included.hours = list()
   
   # for each file, extract the deltaT for DSY1
   for (building in 1:n.build){
@@ -30,6 +30,7 @@ make.plot.exp3 = function(results.f.names,
     bin.string.spread[bin.string.spread>0]=1
     bin.string.spread[is.na(bin.string.spread)]=0 # get rid of NAs
     included.hours[[building]] = which(bin.string.spread==1)
+    all.temp.data[[building]] = temp.dat
   }
   
   # http://stackoverflow.com/questions/7977383/xy-plot-between-strings-and-numbers (useful link)
@@ -51,5 +52,5 @@ make.plot.exp3 = function(results.f.names,
        breaks = seq(min(data)-78,max(data)+78,1),
        main = DSY.file.name)
   
-  return()
+  return(all.temp.data)
 }

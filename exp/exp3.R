@@ -32,7 +32,7 @@ for (file in 1:42){ # for each weather file (DSY type and location)
         weather.name=weather.file.select(file = file, fold = fold) # get and set the weather file
         
         # this first step is just a straight run of the simulator
-        outsim = run.simulators(x) 
+        outsim = run.simulators(building.sample) 
         delT = outsim$deltaT  
         
         # find the areas where deltaT is greater than 0
@@ -55,7 +55,7 @@ for (file in 1:42){ # for each weather file (DSY type and location)
         display.temps('weather.epw')
         # so we run of the deconstructed weather file
         sim=simulator.deconstruct 
-        outsim.deconstruct = run.simulators(x) # runs the deconstructed simulator
+        outsim.deconstruct = run.simulators(building.sample) # runs the deconstructed simulator
         
         # display the compared results as a table
         res = display.results(delT.hourly,
@@ -78,10 +78,9 @@ saveRDS(x, file = paste(save.folder, 'building.configs/building configurations.R
 
 # Analyse results ---------------------------------------------------------
 results.f.names = paste(save.folder, dir(save.folder, pattern = '*.RDS'), sep='')
-make.plot.exp3(results.f.names, DSY.file.name = 'London_DSY2', n.build = 30)
+temp.data = make.plot.exp3(results.f.names, DSY.file.name = 'Manchester_DSY3', n.build = 30)
 make.plot.exp3(results.f.names, 'DSY2')
 make.plot.exp3(results.f.names, 'DSY3')
-
 
 
 
