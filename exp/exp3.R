@@ -76,10 +76,9 @@ for (file in 1:42){ # for each weather file (DSY type and location)
 
 saveRDS(x, file = paste(save.folder, 'building.configs/building configurations.RDS', sep=''))
 
-
 # Analyse results ---------------------------------------------------------
 results.f.names = paste(save.folder, dir(save.folder, pattern = '*.RDS'), sep='')
-make.plot.exp3(results.f.names, 'DSY1')
+make.plot.exp3(results.f.names, DSY.file.name = 'London_DSY2', n.build = 30)
 make.plot.exp3(results.f.names, 'DSY2')
 make.plot.exp3(results.f.names, 'DSY3')
 

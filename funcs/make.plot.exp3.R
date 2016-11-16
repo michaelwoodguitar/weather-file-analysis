@@ -1,14 +1,27 @@
-make.plot.exp3 = function(results.f.names,
-                          DSYid){
+make.plot.exp3 = function(results.f.names, 
+                          DSY.file.name,
+                          n.build){
   
-  loc = which(grepl(DSYid,results.f.names))
-  results.f.names[loc]
+  # n.build is the total number of buildings
+  
+  # match DSY
+  DSY.match = which(grepl(DSY.file.name,results.f.names))
+  # match building
+
+  
+  
+  # results.f.names[DSY.match]
   results.all = list()
   included.hours = list()
   
   # for each file, extract the deltaT for DSY1
-  for (i in loc){
-    temp.dat = readRDS(file = results.f.names[i])
+  for (building in 1:n.build){
+    
+    build.string = paste(' ', building, ' ', sep='')
+    build.match = which(grepl(build.string, results.f.names))
+    insct = intersect(DSY.match, build.match)
+    
+    temp.dat = readRDS(file = results.f.names[insct])
     bin.vec = temp.dat$`Delta T`>0
     # do the convolution bit
     spread = rep(1,24*days.spread)
@@ -16,22 +29,27 @@ make.plot.exp3 = function(results.f.names,
     bin.string.spread = filter(bin.vec,spread, sides=2) # convolve strings
     bin.string.spread[bin.string.spread>0]=1
     bin.string.spread[is.na(bin.string.spread)]=0 # get rid of NAs
-    included.hours[[i]] = which(bin.string.spread==1)
+    included.hours[[building]] = which(bin.string.spread==1)
   }
   
   # http://stackoverflow.com/questions/7977383/xy-plot-between-strings-and-numbers (useful link)
   
-  build.id = 1
-  
-  plot(included.hours[[loc[1]]],rep(build.id, length(included.hours[[loc[1]]])), pch='.', 
-       ylim=c(0, length(loc)), xlim=c(0,8760),
+  # plot the line charts
+  plot(included.hours[[1]],rep(1, length(included.hours[[1]])), pch='.', 
+       ylim=c(0, length(DSY.match)), xlim=c(0,8760),
        xlab='Hour of the year', ylab='Building ID',
-       main='Times of the year where Delta T is greater than 0')
+       main='Times of the year where Delta T is greater than 0',
+       sub=DSYid)
   
-  for (i in loc[-1]){
-    build.id = build.id+1
-    points(included.hours[[i]],rep(build.id, length(included.hours[[i]])), pch='.')
+  for (i in 2:n.build){
+    points(included.hours[[i]],rep(i, length(included.hours[[i]])), pch='.')
   }
+  
+  # plot the histogram
+  data = unlist(included.hours)
+  hist(data, 
+       breaks = seq(min(data)-78,max(data)+78,1),
+       main = DSY.file.name)
   
   return()
 }
