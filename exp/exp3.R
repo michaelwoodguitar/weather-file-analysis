@@ -11,15 +11,15 @@ days.spread = 3
 # put a for loop in for buildings...
 
 # Building analysis -------------------------------------------------------
-no.buildings = 30
+no.buildings = 3
 variables=read.xlsx(var.file, sheetIndex = 1)
 nvar=sum(variables$Vary.)
 # x = runif(n = nvar,min = 0, max = 1)
 x = lhsDesign(n = no.buildings, dimension = nvar, randomized = T)$design # is is x$design[i,] for each individual design...
 save.folder = 'exp/exp3/'
+
 # note that there are 42 DSY in my wather file folder to be analysed. 
-  
-for (file in 1:42){ # for each weather file (DSY type and location)
+for (file in 10:13){ # for each weather file (DSY type and location)
         
     for (building in 1:no.buildings){ # for each building
       
@@ -78,7 +78,7 @@ saveRDS(x, file = paste(save.folder, 'building.configs/building configurations.R
 
 # Analyse results ---------------------------------------------------------
 results.f.names = paste(save.folder, dir(save.folder, pattern = '*.RDS'), sep='')
-temp.data = make.plot.exp3(results.f.names, DSY.file.name = 'Manchester_DSY3', n.build = 30)
+temp.data = make.plot.exp3(results.f.names, DSY.file.name = 'Edinburgh_DSY3', n.build = no.buildings)
 make.plot.exp3(results.f.names, 'DSY2')
 make.plot.exp3(results.f.names, 'DSY3')
 

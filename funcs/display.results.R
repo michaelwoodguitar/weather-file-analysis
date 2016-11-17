@@ -18,4 +18,3 @@ display.results = function(delT.hourly,
   
   return(o)
 }
-§
