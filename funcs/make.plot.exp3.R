@@ -16,11 +16,10 @@ make.plot.exp3 = function(results.f.names,
   
   # for each file, extract the deltaT for DSY1
   for (building in 1:n.build){
-    
+
     build.string = paste(' ', building, ' ', sep='')
     build.match = which(grepl(build.string, results.f.names))
     insct = intersect(DSY.match, build.match)
-    
     temp.dat = readRDS(file = results.f.names[insct])
     bin.vec = temp.dat$`Delta T`>0
     # do the convolution bit
@@ -31,6 +30,7 @@ make.plot.exp3 = function(results.f.names,
     bin.string.spread[is.na(bin.string.spread)]=0 # get rid of NAs
     included.hours[[building]] = which(bin.string.spread==1)
     all.temp.data[[building]] = temp.dat
+    
   }
   
   # http://stackoverflow.com/questions/7977383/xy-plot-between-strings-and-numbers (useful link)
@@ -49,8 +49,10 @@ make.plot.exp3 = function(results.f.names,
   # plot the histogram
   data = unlist(included.hours)
   hist(data, 
-       breaks = seq(min(data)-78,max(data)+78,1),
-       main = DSY.file.name)
-  
+       breaks = seq(0,8706,1),
+       main = DSY.file.name,
+       xlab='Hour of the year',
+       ylab='Count of hours where deltaT > 0')
+
   return(all.temp.data)
 }

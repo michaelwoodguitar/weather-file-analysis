@@ -1,0 +1,59 @@
+---
+title: "Weather file decomposition analysis: update 3"
+output:
+  html_notebook: default
+  html_document: default
+  pdf_document: default
+---
+
+```{r echo=F, message=F}
+# source libraries and function
+source('../required.R')
+
+```
+
+I've been doing a bit more digging on the data this week. 
+
+Just to recap, the I've tested lots of the DSY files with lots of buildings. I've been looking at where the internal temperature $\Delta T > 0$  (because this affects all of the CIBSE overheating criteria). 
+
+**However**, the times are the year where $\Delta T > 0$ are not the same for all buildings. I wanted to find out how this varied.
+
+## How the buildings were set up
+
+We used a simple building model and allowed some of the variables to change. These were: 
+
+```{r}
+var.file = '../data/all-variables-exp3.xlsx'
+# file = 7 # choose the type of weather file
+fold = 1 # folder 1 is DSY, folder 2 is TRY
+days.spread = 3
+variables=read.xlsx(var.file, sheetIndex = 1)
+variables$Name = gsub('%%','', variables$Name)
+kable(variables[variables$Vary.==1,c(2,3,4)])
+```
+
+Using these ranges, I selected 30 building using a Latin Hypercube method (next time I run the simulation, I'm going to use more samples...)
+
+## Results so far
+
+Each building was run using each of the 42 of the DSY files (3 weather files at each of the 14 locations). The hours where $\Delta T$ is greater than 0 were counted. 
+
+Here's the output of a 30 building Newcastle DSY2 shown in both a stacked and histogram format: 
+
+```{r}
+source('../required.R')
+save.folder = '../exp/exp3/'
+# Analyse results - histrogram stacker ---------------------------------------------------------
+results.f.names = paste(save.folder, dir(save.folder, pattern = '*.RDS'), sep='')
+temp.data = make.plot.exp3(results.f.names, DSY.file.name = 'Newcastle_DSY2', n.build = no.buildings)
+```
+
+The results differ quite a bit for warmer locations like London, although there are commonalities across buildings:
+
+```{r}
+temp.data = make.plot.exp3(results.f.names, DSY.file.name = 'London_DSY1', n.build = no.buildings)
+```
+
+## Delta T doesn't detect severity
+
+As [Matt](mailto:m.e.eames@exeter.ac.uk) rightly pointed out today, $\Delta T$ doesn't affect severity. So next week I'll be working on ways to do that. If you have any good ideas, you [email me](mailto:michaelwoodguitar@gmail.com).

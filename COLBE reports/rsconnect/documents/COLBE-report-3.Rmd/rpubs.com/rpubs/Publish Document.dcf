@@ -1,0 +1,8 @@
+name: Publish Document
+title:
+account: rpubs
+server: rpubs.com
+appId: https://api.rpubs.com/api/v1/document/228267/d84b6ecabb944091a1bd14a5ddb86338
+bundleId: https://api.rpubs.com/api/v1/document/228267/d84b6ecabb944091a1bd14a5ddb86338
+url: http://rpubs.com/michaelwood1980/228267
+when: 1479479346.1829

@@ -3,7 +3,7 @@
 
 # this is the variables file...
 var.file = 'data/all-variables-exp3.xlsx'
-# file = 7 # choose the type of weathe file
+# file = 7 # choose the type of weather file
 fold = 1 # folder 1 is DSY, folder 2 is TRY
 days.spread = 3
 
@@ -11,7 +11,7 @@ days.spread = 3
 # put a for loop in for buildings...
 
 # Building analysis -------------------------------------------------------
-no.buildings = 3
+no.buildings = 30
 variables=read.xlsx(var.file, sheetIndex = 1)
 nvar=sum(variables$Vary.)
 # x = runif(n = nvar,min = 0, max = 1)
@@ -78,9 +78,7 @@ saveRDS(x, file = paste(save.folder, 'building.configs/building configurations.R
 
 # Analyse results - histrogram stacker ---------------------------------------------------------
 results.f.names = paste(save.folder, dir(save.folder, pattern = '*.RDS'), sep='')
-temp.data = make.plot.exp3(results.f.names, DSY.file.name = 'Edinburgh_DSY3', n.build = no.buildings)
-make.plot.exp3(results.f.names, 'DSY2')
-make.plot.exp3(results.f.names, 'DSY3')
+temp.data = make.plot.exp3(results.f.names, DSY.file.name = 'Newcastle_DSY2', n.build = no.buildings)
 
 
 
