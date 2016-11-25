@@ -1,0 +1,178 @@
+---
+title: "Weather file decomposition"
+author: "Mike Wood"
+date: "24 November 2016"
+output:
+  pdf_document:
+    fig_caption: yes
+    includes:
+      in_header: header.tex
+    latex_engine: xelatex
+    pandoc_args:
+    - -V
+    - classoption=twocolumn,a4paper,10pt
+    toc: no
+  html_document:
+    toc: no
+  word_document:
+    toc: no
+geometry: top=2.5cm, bottom=2.5cm, left=2.0cm, right=2.0cm, columnsep=0.8cm
+csl: ieee.csl
+bibliography: references.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(png)
+library(grid)
+```
+
+
+# Abstract
+
+(i) what is the current
+state of the art
+
+Our work is about testing buildings for overheating in a more efficient and useful way. 
+
+<!-- See Manuel's literature review for more information on this.-->
+
+(ii) what are its deficiencies.
+
+The current methods are limited. Buildings are usually only testing with one year's-worth of weather data. This is a problem because a) one year is rarely enough of a test to give a building all the different type of heatwave that it might encounter in its lifetime and b) because simulating the weather over a whole year is not necessary (in most cases you don't need to simulation winter, spring and autumn to capture all of the overheating events). 
+
+(iii) what methods have been applied
+
+Our work aims to address both the problems. First we use a simple technique to extract the hot weather events using data from 100s of simulations to detect the areas of weather files that contain significant heatwaves. Second, we then rate each of these heatwaves according to their duration and severity (based on their effect on buildings).
+
+(iv) what are the results
+
+The results show that, for the DSY files tested, the severity and duration of the heatwaves varies not only between locations (as you would expect) for the locations themselves. The current CIBSE design summer years for the UK only contain three weather files for each location. It is therefore *very* likely that the heatwaves contained in these files do not cover anything like the potential hot events that a building might encounter in its lifetime.
+
+(v) what is the lasting contribution of the submission.
+
+Based on these results, we must be very careful about how we design weather files to test our buildings. We have shown that 
+
+Further work is therefore required. 
+
+# Introduction
+
+## Testing buildings with weather files
+
+Testing building is a complicated process. One of the main things that you need to do is test for overheating. However, since differnet types of buildings overheat differently and we don't know what type of weather events a building might experience, we have a problem. How big should the overheating events be? What constitutes 'bigness'? Should we test buildings the same way in Newcastle as we test them in London. And how do we define a local climate? Climates are changing all the time, so you cannot know for certain what the climate might be like in a given location - let alone guess what the individual overheating events might be. 
+
+There are a lot of questions to answer - and there are equally as many ways to answer them. HOwever, we need to start somewhere. In this paper, we have decided to look at the very bottom of the question tree... How do we define a heatwave? 
+
+Clearly temperatures indoors differ from outdoors (otherwise why would we be worried about buildings?). But even if we just want to find a clear definition of what an *outdoor* heatwave is, we find ourselves struggling. There are many different definitions:
+
+- various definition of heatwaves from Ed's paper <!-- Add the definitions here -->
+
+We have also recently shown that it is **very** difficult to assess whether a building is overheating internally, since, again there are so many different overheating measurement methods to choose from. Eames has looking into this in his recent paper for the *Winsor Conference*. Among other things, the paper looks at extreme internal overheating events. He looked for heatwaves with severities that occured every 1:7 years and every 1:21 years. However, instead of rating the severity by the *external* temperature, he rated them using the *internal* temperature. The results were interesting.
+
+Eames chose years that had a 1:7 year event in them, based on the internal overheating metric. However, the year chosen was dependent on the overheating metric chosen. In other words, the overheating metric you choose will affect how 'severe' a heat wave appears. 
+
+In some ways this is to be expected because different overheating metrics measure different things. 
+
+What we need is a good method for finding overheating events that trigger a particular metric. This would solve two problems:
+
+- It would enable 'redundant' sections of the weather file to be removed, thereby reducing the computational burden in testing buildings for overheating. 
+- If we know how much an overheating event will trigger a particular metric, then we can analyse past and future weather to identify how often a particular event is likely to occur. We can then use weather generation models (such as the UKCP09 weather generator) to make predictions of how many of these events are likely to occur in the future. 
+
+Once we have this information, we might have better tools for 'stress testing' buidlings designs for the events that they might encounter in the future. However, we first need some tools to identify these events so that this research can begin. 
+
+Our work is in three stages:
+
+- identify the overheating criteria (as this will affect the overheating events selected - as we have already seen)
+- find out when this overheating criteria is likely to be triggered in a given weather file
+- rate the overheating events in each weather file according to their severity
+
+## Related work
+
+<!-- Related work from Process.st should go here. -->
+
+# Overheating definitions
+
+CIBSE TM52 [@Nicol2013-gf] was released in 2013 and introduces three overheating criteria:
+
+1. The number of hours where the internal operative temperature is above the maximum acceptable temperature (H~e~)^[Where H~e~ stands for *hours of exceedance*]
+2. The daily weighted exceedance (W~e~).
+3. The maximum operative temperature (T~upper~)
+
+These criteria are intended to minimise overheating over a broad range of possible overheating events. 
+
+## The derivation of $\Delta T$
+
+H~e~ stands for hours of exceendance, where the exceedance is measured by $\Delta T$, rounded to the nearest degree^[note that $\Delta T$ is measured on each timestep, rather than over a whole year, as H~e~ is.]. The exceedance $\Delta T$ is the number of hours where the internal operative temperature T~op~ is above the maximum acceptable temperature T~comf~. The internal operative temperature T~op~, is defined as:
+
+$$ T_{op} = \frac{T_a - T_r}{2} $$ 
+
+Where $T_a$ is the mean air temperature and $T_r$ is the mean radiant temperature.
+
+The difference between the maximum acceptable temperature and the operative temperature is defined as $\Delta T$, where:
+
+$$ \Delta T = T_{op} - T_{max}$$ 
+
+Where $T_{max}$ is maximum acceptable internal temperature.
+
+This equation requires a further definition, that of $T_{max}$. 
+
+$T_{max}$ is the definition of the maximum acceptable temperature. However, it has been shown that the 'accpetable temperatue' is dependent on recent external temperature trends. This is due to temperature adaptation. So, in order to define, $T_{max}$, the *running mean* temperature is used:
+
+$$ T_{max} = 0.33 T_{rm} + 21.8 $$
+
+The running mean T~rm~ is defined as:
+
+$$ T_{rm} = (1-\alpha) T_{od-1} + \alpha T_{rm-1} $$
+
+Where $T_{od-1}$ is the outdoor daily mean temperature for the previous day, $T_{rm-1}$ is the running mean temperature for the previous day and $\alpha$ is an empirically derived coefficient which typically takes the value 0.8.
+
+These equations can be used to derive $\Delta T$ for each timestep. Once $\Delta T$ is known, the CIBSE criteria can then be calculated.
+
+The hours of exceedance H~e~ is defined as the number of hours where the $\Delta T$ is greater than 1 degree. H~e~ should be less than 3% of occupied hours for the period between 1st May until the 31st September.
+
+The second criteria is the daily weighted exceedance, W~e~. Although this is defined as the weighted exceedance, it best thought of as the cumulative exceedance. This is best explained visually (figure 1).
+
+```{r fig-margin1, fig.margin = TRUE, fig.cap = "MPG vs horsepower, colored by transmission.", fig.width=3.5, fig.height=3.5, echo=F}
+img = readPNG('images/Weighted exceedance.png')
+grid.raster(img)
+```
+
+The weighted exceedance for a given day is the equivalent to total of the grey areas shown in figure 1. To comply with the second criteria, the total daily weighted exceedance $W_e$ should not exceed 6. 
+
+The third criteria is simple; the maximum value of $\Delta T$ should be no greater than 4.  
+
+## Aims
+
+The aim of this work is to develop a method for linking and *overheating criteria* to *events* and to be able to *rate their severtiy*. 
+
+
+\newpage
+\onecolumn
+Please \textbf{DO NOT} include this disclaimer in your paper.  You will be required to accept these conditions when you  submit your paper via the web site.
+\begin{figure*}
+\centering
+\begin{boxedminipage}{\textwidth}
+Building Simulation 2017\\
+
+I or we, the author(s) of the attached paper, have read the following Copyright Transfer and Disclaimer, and agree to them by submitting the attached paper.
+\begin{enumerate}
+\item
+The author(s) affirm that the paper has not been published elsewhere and, if the paper is accepted, will not be published elsewhere prior to Building Simulation 2017.
+\item
+If the paper is accepted, the author(s) will automatically grant to IBPSA a nonexclusive, royalty-free, perpetual, worldwide, irrevocable, sub-licensable, and transferable license to publish the paper (in unmodified form) in any fashion (including but not limited to inclusion in the Building Simulation 2017 printed and electronic proceedings, via electronic means such as the world wide web, and inclusion in future compilations of papers).  This "nonexclusive" license means that the author(s) are not restricted as to future use of the material except that exclusive rights cannot be granted to another.
+\item
+The author(s) affirm that they have the right to grant the license specified in (2), that is, publication by IBPSA or its licensees will not be in conflict with copyright or other restrictions.
+\item
+The author(s) acknowledge that acceptance of the paper does not imply IBPSA's endorsement of or agreement with the ideas presented.  Under no circumstances shall IBPSA be liable for any damages resulting from use information included in the paper.
+\end{enumerate}
+\end{boxedminipage}
+\caption{The author will be required to accept these conditions when they submit their paper via the web site.}
+\label{fig:fig02}
+\end{figure*}
+
+\twocolumn
+
+
+
+
+

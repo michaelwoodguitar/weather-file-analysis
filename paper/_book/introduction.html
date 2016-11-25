@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Weather file decomposition</title>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  <meta name="description" content="Weather file decomposition">
+  <meta name="generator" content="bookdown 0.2 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Weather file decomposition" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Weather file decomposition" />
+  
+  
+  
+
+<meta name="author" content="Mike Wood">
+
+
+<meta name="date" content="2016-11-24">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="abstract.html">
+<link rel="next" href="overheating-definitions.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body>
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="abstract.html"><a href="abstract.html"><i class="fa fa-check"></i><b>1</b> Abstract</a></li>
+<li class="chapter" data-level="2" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>2</b> Introduction</a><ul>
+<li class="chapter" data-level="2.1" data-path="introduction.html"><a href="introduction.html#testing-buildings-with-weather-files"><i class="fa fa-check"></i><b>2.1</b> Testing buildings with weather files</a></li>
+<li class="chapter" data-level="2.2" data-path="introduction.html"><a href="introduction.html#related-work"><i class="fa fa-check"></i><b>2.2</b> Related work</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="overheating-definitions.html"><a href="overheating-definitions.html"><i class="fa fa-check"></i><b>3</b> Overheating definitions</a><ul>
+<li class="chapter" data-level="3.1" data-path="overheating-definitions.html"><a href="overheating-definitions.html#the-derivation-of-delta-t"><i class="fa fa-check"></i><b>3.1</b> The derivation of <span class="math inline">\(\Delta T\)</span></a></li>
+<li class="chapter" data-level="3.2" data-path="overheating-definitions.html"><a href="overheating-definitions.html#aims"><i class="fa fa-check"></i><b>3.2</b> Aims</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Weather file decomposition</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="introduction" class="section level1">
+<h1><span class="header-section-number">2</span> Introduction</h1>
+<div id="testing-buildings-with-weather-files" class="section level2">
+<h2><span class="header-section-number">2.1</span> Testing buildings with weather files</h2>
+<p>Testing building is a complicated process. One of the main things that you need to do is test for overheating. However, since differnet types of buildings overheat differently and we don’t know what type of weather events a building might experience, we have a problem. How big should the overheating events be? What constitutes ‘bigness’? Should we test buildings the same way in Newcastle as we test them in London. And how do we define a local climate? Climates are changing all the time, so you cannot know for certain what the climate might be like in a given location - let alone guess what the individual overheating events might be.</p>
+<p>There are a lot of questions to answer - and there are equally as many ways to answer them. HOwever, we need to start somewhere. In this paper, we have decided to look at the very bottom of the question tree… How do we define a heatwave?</p>
+<p>Clearly temperatures indoors differ from outdoors (otherwise why would we be worried about buildings?). But even if we just want to find a clear definition of what an <em>outdoor</em> heatwave is, we find ourselves struggling. There are many different definitions:</p>
+<ul>
+<li>various definition of heatwaves from Ed’s paper <!-- Add the definitions here --></li>
+</ul>
+<p>We have also recently shown that it is <strong>very</strong> difficult to assess whether a building is overheating internally, since, again there are so many different overheating measurement methods to choose from. Eames has looking into this in his recent paper for the <em>Winsor Conference</em>. Among other things, the paper looks at extreme internal overheating events. He looked for heatwaves with severities that occured every 1:7 years and every 1:21 years. However, instead of rating the severity by the <em>external</em> temperature, he rated them using the <em>internal</em> temperature. The results were interesting.</p>
+<p>Eames chose years that had a 1:7 year event in them, based on the internal overheating metric. However, the year chosen was dependent on the overheating metric chosen. In other words, the overheating metric you choose will affect how ‘severe’ a heat wave appears.</p>
+<p>In some ways this is to be expected because different overheating metrics measure different things.</p>
+<p>What we need is a good method for finding overheating events that trigger a particular metric. This would solve two problems:</p>
+<ul>
+<li>It would enable ‘redundant’ sections of the weather file to be removed, thereby reducing the computational burden in testing buildings for overheating.</li>
+<li>If we know how much an overheating event will trigger a particular metric, then we can analyse past and future weather to identify how often a particular event is likely to occur. We can then use weather generation models (such as the UKCP09 weather generator) to make predictions of how many of these events are likely to occur in the future.</li>
+</ul>
+<p>Once we have this information, we might have better tools for ‘stress testing’ buidlings designs for the events that they might encounter in the future. However, we first need some tools to identify these events so that this research can begin.</p>
+<p>Our work is in three stages:</p>
+<ul>
+<li>identify the overheating criteria (as this will affect the overheating events selected - as we have already seen)</li>
+<li>find out when this overheating criteria is likely to be triggered in a given weather file</li>
+<li>rate the overheating events in each weather file according to their severity</li>
+</ul>
+</div>
+<div id="related-work" class="section level2">
+<h2><span class="header-section-number">2.2</span> Related work</h2>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="abstract.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="overheating-definitions.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

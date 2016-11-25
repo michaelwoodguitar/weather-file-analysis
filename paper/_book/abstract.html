@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Weather file decomposition</title>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  <meta name="description" content="Weather file decomposition">
+  <meta name="generator" content="bookdown 0.2 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Weather file decomposition" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Weather file decomposition" />
+  
+  
+  
+
+<meta name="author" content="Mike Wood">
+
+
+<meta name="date" content="2016-11-24">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+
+<link rel="next" href="introduction.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body>
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="abstract.html"><a href="abstract.html"><i class="fa fa-check"></i><b>1</b> Abstract</a></li>
+<li class="chapter" data-level="2" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>2</b> Introduction</a><ul>
+<li class="chapter" data-level="2.1" data-path="introduction.html"><a href="introduction.html#testing-buildings-with-weather-files"><i class="fa fa-check"></i><b>2.1</b> Testing buildings with weather files</a></li>
+<li class="chapter" data-level="2.2" data-path="introduction.html"><a href="introduction.html#related-work"><i class="fa fa-check"></i><b>2.2</b> Related work</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="overheating-definitions.html"><a href="overheating-definitions.html"><i class="fa fa-check"></i><b>3</b> Overheating definitions</a><ul>
+<li class="chapter" data-level="3.1" data-path="overheating-definitions.html"><a href="overheating-definitions.html#the-derivation-of-delta-t"><i class="fa fa-check"></i><b>3.1</b> The derivation of <span class="math inline">\(\Delta T\)</span></a></li>
+<li class="chapter" data-level="3.2" data-path="overheating-definitions.html"><a href="overheating-definitions.html#aims"><i class="fa fa-check"></i><b>3.2</b> Aims</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Weather file decomposition</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">Weather file decomposition</h1>
+<h4 class="author"><em>Mike Wood</em></h4>
+<h4 class="date"><em>24 November 2016</em></h4>
+</div>
+<div id="abstract" class="section level1">
+<h1><span class="header-section-number">1</span> Abstract</h1>
+<ol style="list-style-type: lower-roman">
+<li>what is the current state of the art</li>
+</ol>
+<p>Our work is about testing buildings for overheating in a more efficient and useful way.</p>
+<!-- See Manuel's literature review for more information on this.-->
+<ol start="2" style="list-style-type: lower-roman">
+<li>what are its deficiencies.</li>
+</ol>
+<p>The current methods are limited. Buildings are usually only testing with one year’s-worth of weather data. This is a problem because a) one year is rarely enough of a test to give a building all the different type of heatwave that it might encounter in its lifetime and b) because simulating the weather over a whole year is not necessary (in most cases you don’t need to simulation winter, spring and autumn to capture all of the overheating events).</p>
+<p>Our work aims to address both the problems. First we use a simple technique to extract the hot weather events using data from 100s of simulations to detect the areas of weather files that contain significant heatwaves. Second, we</p>
+<ol start="3" style="list-style-type: lower-roman">
+<li>what methods have been applied,</li>
+<li>what are the results, and</li>
+<li>what is the lasting contribution of the submission.</li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+<a href="introduction.html" class="navigation navigation-next navigation-unique" aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -1,0 +1,121 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% BS2017_paper_format_guide.tex
+% Michael Wetter, mwetter@lbl.gov
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \documentclass[twocolumn, a4paper,10pt]{article}
+\usepackage{boxedminipage}
+\usepackage{nopageno}
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage{enumitem}
+\usepackage[font=it]{caption}
+\usepackage{hyperref}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{listings}
+\usepackage{caption}
+\usepackage{subcaption}
+
+% \usepackage[top=2.5cm, bottom=2.5cm, left=2.0cm, right=2.0cm,columnsep=0.8cm]{geometry}
+
+\setlength{\abovecaptionskip}{0.2cm}
+\setlength{\belowcaptionskip}{0cm}
+\setlength{\parindent}{0pt}
+
+% Comment this line if you want to compile the paper without comments
+\newcommand{\displaycomments}
+
+\setcounter{secnumdepth}{-1}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Set fonts for title, section and subsection headings
+\makeatletter
+\renewcommand\title[1]{\gdef\@title{\fontsize{12pt}{2pt}\bfseries{#1}}}
+\makeatletter
+\renewcommand\section{\@startsection{section}{1}{\z@}{0.25cm}{0.1cm}{\normalfont\large\bfseries}}
+% \normalfont\large
+\makeatletter
+\renewcommand\subsection{\@startsection{subsection}{1}{\z@}{0.2cm}{0.1cm}{\normalfont\normalsize\bfseries}}
+\makeatletter
+\renewcommand\subsubsection{\@startsection{subsection}{1}{\z@}{0.2cm}{0.1cm}{\normalfont\normalsize\itshape}}
+
+\renewcommand\refname{References}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%Configurations from the "enumitem" package to set the configurations
+%%for the lists and remove undesired horizontal space for the enumerate
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setlist{itemsep=-0.1cm,topsep=0.1cm,labelsep=0.3cm}
+\setenumerate{leftmargin=*}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% END OF THE SETUP
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%--------------------------------
+% Custom configurations by mwetter@lbl.gov
+\usepackage{amsmath, amssymb}
+\usepackage{color}
+\usepackage{url}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{rema}[defn]{Remark}
+%QED box, from the TeXbook, p. 106. ----------------------------------
+\newcommand\qed{{\unskip\nobreak\hfil\penalty50\hskip2em\vadjust{}
+    \nobreak\hfil$\Box$\parfillskip=0pt\finalhyphendemerits=0\par}}
+
+\renewcommand{\Re}{{\mathbb R}}
+\newcommand{\Rep}{{\Re_{+}}}
+\newcommand{\Na}{{\mathbb N}}
+\newcommand{\Z}{{\mathbb Z}}
+\newcommand{\codi}[2]{{\mathcal{C}^{#1}(#2)}}
+
+\DeclareMathOperator{\sgn}{sgn}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% see: http://mirror.aarnet.edu.au/pub/CTAN/macros/latex/contrib/listings/listings-1.3.pdf
+\lstset{%
+  basicstyle=\fontsize{8}{9}\selectfont\ttfamily,
+%  basicstyle=\small, % print whole listing small
+  keywordstyle=\color{red},
+  identifierstyle=, % nothing happens
+  commentstyle=\color{blue}, % white comments
+  stringstyle=\color{OliveGreen}\it, % typewriter type for strings
+  showstringspaces=false,
+  numbers=left,
+  numberstyle=\tiny,
+  numbersep=5pt} % no special string space
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\lstdefinelanguage{Modelica}{%
+  morekeywords={Modelica,Thermal,HeatTransfer,Interfaces, flow, %
+    SI,Temperature,HeatFlowRate,HeatPort, Real, zeros},
+  sensitive=false,
+  morecomment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]",
+  emph={equation, partial, connector, model, public, end, %
+    extends, parameter}, emphstyle=\color{blue},
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%% Please keep the \vspace{-1.5cm} at the top
+\title{%
+Paper Preparation Guide and Submission Instructions\\	% Line 1
+%%% Please keep the \vspace{4pt} between lines in the title
+\vspace{4pt}
+for Building Simulation 2017 Conference % Line 2 - If there is no second line then just put \phantom{Line 2} here
+}
+
+%%% Change or delete text before "\\" on the lines below to keep the layout but don't remove the "\\"
+%%% Do not exceed more than 6 lines for authors and affiliations
+\author{
+John MacModeller$^1$, Jane MacSimulator$^2$, Another MacAuthor$^2$\\ % Line 4
+$^1$BS Secretariat, Some Town, Some Country\\ % Line 5
+$^2$Another Institution, University of Origin, Some City, Some Country\\ % Line 6
+The names and affiliations SHOULD NOT be included in the draft submitted for review.\\ % Line 7
+The header consists of 10 lines with exactly 14 points spacing.\\ % Line 8
+The last line below should be left blank.} % Line 9 - Last line
+\date{\vspace{-0.5cm}}	% remove default date and replace the Blank 10th line
