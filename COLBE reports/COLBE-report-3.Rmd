@@ -12,7 +12,7 @@ source('../required.R')
 
 ```
 
-I've been doing a bit more digging on the data this week. 
+I've been doing a bit more digging on the data this week.  
 
 Just to recap, the I've tested lots of the DSY files with lots of buildings. I've been looking at where the internal temperature $\Delta T > 0$  (because this affects all of the CIBSE overheating criteria). 
 
@@ -48,7 +48,7 @@ results.f.names = paste(save.folder, dir(save.folder, pattern = '*.RDS'), sep=''
 temp.data = make.plot.exp3(results.f.names, DSY.file.name = 'Newcastle_DSY2', n.build = no.buildings)
 ```
 
-The results differ quite a bit for warmer locations like London, although there are commonalities across buildings:
+The results differ quite a bit for warmer locations like London, although there are commonalities across buildings: 
 
 ```{r}
 temp.data = make.plot.exp3(results.f.names, DSY.file.name = 'London_DSY1', n.build = no.buildings)

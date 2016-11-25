@@ -21,7 +21,7 @@ make.plot.exp3 = function(results.f.names,
     build.match = which(grepl(build.string, results.f.names))
     insct = intersect(DSY.match, build.match)
     temp.dat = readRDS(file = results.f.names[insct])
-    bin.vec = temp.dat$`Delta T`>0
+    bin.vec = temp.dat$`Delta T`>0 # this included the three day run up (or whatever the run up is.)
     # do the convolution bit
     spread = rep(1,24*days.spread)
     # spread = c(seq(0,1, 1/((24*days.spread)/2)), seq(1,0, -1/((24*days.spread)/2)))

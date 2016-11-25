@@ -1,0 +1,33 @@
+---
+title: "Weather file decomposition analysis: update 4"
+output:
+  html_notebook: default
+  html_document: default
+  pdf_document: default
+---
+
+```{r echo=F, message=F}
+# source libraries and function
+source('../required.R')
+
+```
+
+So, if we are going to use $\Delta T$ as a detection mechanism, we do a logical **OR** between all the 100 tested buildings. We do this for each weather year in *each climate*. 
+
+```{r}
+source('../required.R')
+save.folder = '../exp/exp3/'
+# Analyse results - histrogram stacker ---------------------------------------------------------
+results.f.names = paste(save.folder, dir(save.folder, pattern = '*.RDS'), sep='')
+temp.data = make.plot.exp3(results.f.names, DSY.file.name = 'Newcastle_DSY2', n.build = no.buildings)
+```
+
+```{r}
+OR.data = make.plot.OR(results.f.names, DSY.file.name = 'Newcastle_DSY2', n.build = no.buildings)
+```
+
+```{r}
+# plus 3 days either side
+
+```
+

@@ -26,17 +26,19 @@ simulator.deconstruct <- function(p){
   # However, we are most interseted in the hours over 25 and 28:
   
   o = list(out$CIBSE.A,
-       out$CIBSE.B,
+           out$CIBSE.B,
            out$CIBSE.C,
-            out$Top,
-            out$steps.per.hour,
-            out$DelT)
+           out$Top,
+           out$steps.per.hour,
+           out$DelT,
+           out$WeMax_day)
   
   names(o) = c('CIBSE.A',
                'CIBSE.B',
                'CIBSE.C',
                'Top',
                'steps.per.hour',
-               'deltaT')
+               'deltaT',
+               'WeMax_day')
   return(o)   
 }
