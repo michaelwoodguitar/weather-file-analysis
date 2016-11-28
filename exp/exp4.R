@@ -2,7 +2,7 @@
 # =======================================================
 
 # this is the variables file...
-var.file = 'data/all-variables-exp3.xlsx'
+var.file = 'data/all-variables-exp4.xlsx'
 # file = 7 # choose the type of weather file
 fold = 1 # folder 1 is DSY, folder 2 is TRY
 days.spread = 3
@@ -16,7 +16,7 @@ variables=read.xlsx(var.file, sheetIndex = 1)
 nvar=sum(variables$Vary.)
 # x = runif(n = nvar,min = 0, max = 1)
 x = lhsDesign(n = no.buildings, dimension = nvar, randomized = T)$design # is is x$design[i,] for each individual design...
-save.folder = 'exp/exp3/'
+save.folder = 'exp/exp4/'
 
 # note that there are 42 DSY in my wather file folder to be analysed. 
 for (file in 1:42){ # for each weather file (DSY type and location)

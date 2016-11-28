@@ -27,33 +27,20 @@ library(png)
 library(grid)
 ```
 
-
 # Abstract
 
-(i) what is the current
-state of the art
-
+<!-- what is the state of the art? -->
 Our work is about testing buildings for overheating in a more efficient and useful way. 
 
 <!-- See Manuel's literature review for more information on this.-->
 
-(ii) what are its deficiencies.
-
 The current methods are limited. Buildings are usually only testing with one year's-worth of weather data. This is a problem because a) one year is rarely enough of a test to give a building all the different type of heatwave that it might encounter in its lifetime and b) because simulating the weather over a whole year is not necessary (in most cases you don't need to simulation winter, spring and autumn to capture all of the overheating events). 
-
-(iii) what methods have been applied
 
 Our work aims to address both the problems. First we use a simple technique to extract the hot weather events using data from 100s of simulations to detect the areas of weather files that contain significant heatwaves. Second, we then rate each of these heatwaves according to their duration and severity (based on their effect on buildings).
 
-(iv) what are the results
-
 The results show that, for the DSY files tested, the severity and duration of the heatwaves varies not only between locations (as you would expect) for the locations themselves. The current CIBSE design summer years for the UK only contain three weather files for each location. It is therefore *very* likely that the heatwaves contained in these files do not cover anything like the potential hot events that a building might encounter in its lifetime.
 
-(v) what is the lasting contribution of the submission.
-
-Based on these results, we must be very careful about how we design weather files to test our buildings. We have shown that 
-
-Further work is therefore required. 
+Based on these results, we must be very careful about how we design weather files to test our buildings. We have shown that the current methods do not give the full picture. Our research has shown a potential soluation for addressing this problem. Clearly, further work is therefore required. 
 
 # Introduction
 
@@ -88,7 +75,15 @@ Our work is in three stages:
 
 ## Related work
 
-<!-- Related work from Process.st should go here. -->
+Papers to review:
+
+- Reference: [@levermore2006analyses]
+- Reference: [@eames2016update]
+- Reference: [@jentsch2008climate]
+- Reference: [@hacker2009use]
+- Reference: [@coley2010changes]
+- Reference: [@porritt2011adapting]
+- Reference: [@kovats2006heatwaves]
 
 # Overheating definitions
 
@@ -146,6 +141,8 @@ The third criteria is simple; the maximum value of $\Delta T$ should be no great
 The aim of this work is to develop a method for linking and *overheating criteria* to *events* and to be able to *rate their severtiy*. 
 
 
+
+<!-- USE THIS BIT FOR FULL PAGE FIGURES -->
 \newpage
 \onecolumn
 Please \textbf{DO NOT} include this disclaimer in your paper.  You will be required to accept these conditions when you  submit your paper via the web site.
