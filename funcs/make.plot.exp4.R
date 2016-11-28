@@ -1,6 +1,7 @@
 make.plot.exp4 = function(results.f.names, 
                           DSY.file.name,
-                          n.build){
+                          n.build, 
+                          plot.graphs=F){
   
   # n.build is the total number of buildings
   
@@ -38,23 +39,28 @@ make.plot.exp4 = function(results.f.names,
   # http://stackoverflow.com/questions/7977383/xy-plot-between-strings-and-numbers (useful link)
   
   # plot the line charts
-  plot(included.hours[[1]],rep(1, length(included.hours[[1]])), pch='.', 
-       ylim=c(0, length(DSY.match)), xlim=c(0,8760),
-       xlab='Hour of the year', ylab='Building ID',
-       main='Times of the year where Delta T is greater than 0',
-       sub=DSYid)
-  
-  for (i in 2:n.build){
-    points(included.hours[[i]],rep(i, length(included.hours[[i]])), pch='.')
+  if (plot.graphs == T){
+    plot(included.hours[[1]],rep(1, length(included.hours[[1]])), pch='.', 
+         ylim=c(0, length(DSY.match)), xlim=c(0,8760),
+         xlab='Hour of the year', ylab='Building ID',
+         main='Times of the year where Delta T is greater than 0',
+         sub=DSY.file.name)
+    
+    for (i in 2:n.build){
+      points(included.hours[[i]],rep(i, length(included.hours[[i]])), pch='.')
+    }
+    
   }
-  
   # plot the histogram
   data = unlist(included.hours)
-  hist(data, 
-       breaks = seq(0,8706,1),
-       main = DSY.file.name,
-       xlab='Hour of the year',
-       ylab='Count of hours where deltaT > 0')
+  
+    if (plot.graphs == T){
+        hist(data, 
+           breaks = seq(0,8706,1),
+           main = DSY.file.name,
+           xlab='Hour of the year',
+           ylab='Count of hours where deltaT > 0')
+    }
 
   # plot the histogram of WeMax deconstructed
   wemax.mat.decon = matrix(data=unlist(wemax.list.decon), nrow = 184)
@@ -67,13 +73,14 @@ make.plot.exp4 = function(results.f.names,
   wemax.decon.year = rep(wemax.decon.year, each=24)
   wemax.full.year = rep(wemax.full.year, each=24)
   
-  plot(wemax.decon.year,
-       main = paste(DSY.file.name, 'Severity'), 
-       type='l', 
-       ylab='WeMax cumulative', 
-       xlab='Hour')
-  lines(wemax.full.year, col='blue')
-  
+  if (plot.graphs == T){
+    plot(wemax.decon.year,
+         main = paste(DSY.file.name, 'Severity'), 
+         type='l', 
+         ylab='WeMax cumulative', 
+         xlab='Hour')
+    lines(wemax.full.year, col='blue')
+  }
   
   return(all.temp.data)
 }

@@ -3,8 +3,6 @@ title: "Weather file decomposition"
 author: "Mike Wood"
 date: "24 November 2016"
 output:
-  html_document:
-    toc: no
   pdf_document:
     fig_caption: yes
     includes:
@@ -14,6 +12,8 @@ output:
     - -V
     - classoption=twocolumn,a4paper,10pt
     toc: no
+  html_document:
+    toc: no
   word_document:
     toc: no
 geometry: top=2.5cm, bottom=2.5cm, left=2.0cm, right=2.0cm, columnsep=0.8cm
@@ -22,10 +22,14 @@ bibliography: references.bib
 ---
 
 ```{r setup, include=FALSE}
-source('../required.R')
 knitr::opts_chunk$set(echo = TRUE)
 library(png)
 library(grid)
+library(pander)
+
+source('../required.R')
+sourceDir('../funcs/')
+
 ```
 
 # Abstract
@@ -163,8 +167,33 @@ Once we have stored the results, we can then compare them.
 
 Set of Q-Q plots for values in the CIBSE criteria.
 
+```{r echo=F}
+no.of.buildings = 58
+days.spread = 3
+save.folder = '../exp/exp4/'
+results.f.names = paste(save.folder, dir(save.folder, pattern = '*.RDS'), sep='')
+temp.data = make.plot.exp4(results.f.names, 
+                           DSY.file.name = 'Belfast_DSY1', 
+                           n.build = no.of.buildings, 
+                           plot.graphs=F)
+Q1 = temp.data[[1]]$Comparison[,1]
+Q2 = temp.data[[1]]$Comparison[,2]
+Q3 = temp.data[[1]]$Comparison[,3]
 
+for (i in 2:no.of.buildings){
+    tmp1 = temp.data[[i]]$Comparison[,1]
+    tmp2 = temp.data[[i]]$Comparison[,2]
+    tmp3 = temp.data[[i]]$Comparison[,3]
+    Q1 = rbind(Q1, tmp1)
+    Q2 = rbind(Q2, tmp2)
+    Q3 = rbind(Q3, tmp3)
+}
 
+plot(Q1[,1],Q1[,2], main='CIBSE A Criterion', xlab='Full weather', ylab='Partial weather')
+plot(Q2[,1],Q2[,2], main='CIBSE B Criterion', xlab='Full weather', ylab='Partial weather')
+plot(Q3[,1],Q3[,2], main='CIBSE C Criterion', xlab='Full weather', ylab='Partial weather')
+
+```
 
 ## Individual outputs
 
@@ -173,9 +202,8 @@ The plots below show three example plots for Belfast. The first shows the 'trace
 The third graph shows the maximum weighted exceedance for a given day. (The year is indexed by hours so that it is easy to compare with the other two graphs.). This gives a measure of the severity of how much the heatwave affects all of the buildings.
 
 ```{r echo=F}
-save.folder = '../exp/exp4/'
-results.f.names = paste(save.folder, dir(save.folder, pattern = '*.RDS'), sep='')
-temp.data = make.plot.exp4(results.f.names, DSY.file.name = 'Belfast_DSY1', n.build = 58)
+temp.data = make.plot.exp4(results.f.names, DSY.file.name = 'Belfast_DSY1', n.build = 58, 
+                           plot.graphs=T)
 ```
 
 
