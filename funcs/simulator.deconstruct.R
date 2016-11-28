@@ -1,4 +1,4 @@
-\simulator.deconstruct <- function(p){
+simulator.deconstruct <- function(p){
   
   # this runs the simulator with the decomposed weather file.
 

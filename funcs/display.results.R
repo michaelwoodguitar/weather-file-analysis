@@ -1,4 +1,6 @@
 display.results = function(delT.hourly,
+                           WeMaxFull,
+                           WeMaxDecons,
                            full.weather, 
                            partial.weather, 
                            build.design,
@@ -13,8 +15,21 @@ display.results = function(delT.hourly,
   
  
   
-  o = list(delT.hourly, build.design, weather.name, tbl, warm.up)
-  names(o) = c('Delta T','Building design','Weather name', 'Comparison','Warm up days')
+  o = list(delT.hourly,
+           WeMaxFull,
+           WeMaxDecons,
+           build.design,
+           weather.name, 
+           tbl, 
+           warm.up)
+  
+  names(o) = c('Delta T',
+               'WeMaxFull',
+               'WeMaxDecons',
+               'Building design',
+               'Weather name', 
+               'Comparison',
+               'Warm up days')
   
   return(o)
 }

@@ -1,4 +1,4 @@
-# experiment 3 - seeing what the deltaT output looks like
+# experiment 4 - seeing what the deltaT output looks like
 # =======================================================
 
 # this is the variables file...
@@ -37,6 +37,7 @@ for (file in 1:42){ # for each weather file (DSY type and location)
         
         # find the areas where deltaT is greater than 0
         delT.hourly= outsim$deltaT[seq(1,length(outsim$deltaT),12)] # 
+        WeMaxFull = outsim$WeMax_day
         plot(delT.hourly, type='l', col='blue') # hourly plot
         bin.string = delT.hourly*0
         bin.string[delT.hourly>0]=1
@@ -59,6 +60,8 @@ for (file in 1:42){ # for each weather file (DSY type and location)
         
         # display the compared results as a table
         res = display.results(delT.hourly,
+                              WeMaxFull,
+                              WeMaxDecons,
                               outsim, 
                               outsim.deconstruct, 
                               build.design=real.x, 
@@ -78,8 +81,8 @@ saveRDS(x, file = paste(save.folder, 'building.configs/building configurations.R
 
 # Analyse results - histrogram stacker ---------------------------------------------------------
 results.f.names = paste(save.folder, dir(save.folder, pattern = '*.RDS'), sep='')
-temp.data = make.plot.exp3(results.f.names, DSY.file.name = 'Plymouth_DSY3', n.build = no.buildings)
+temp.data = make.plot.exp3(results.f.names, DSY.file.name = 'Belfast_DSY1', n.build = no.buildings)
 
 
-
+temp.data = make.plot.exp3(results.f.names, DSY.file.name = 'Belfast_DSY1', n.build =74)
 
