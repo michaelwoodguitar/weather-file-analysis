@@ -3,6 +3,8 @@ title: "Weather file decomposition"
 author: "Mike Wood"
 date: "24 November 2016"
 output:
+  html_document:
+    toc: no
   pdf_document:
     fig_caption: yes
     includes:
@@ -11,8 +13,6 @@ output:
     pandoc_args:
     - -V
     - classoption=twocolumn,a4paper,10pt
-    toc: no
-  html_document:
     toc: no
   word_document:
     toc: no

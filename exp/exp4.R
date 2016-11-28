@@ -57,6 +57,7 @@ for (file in 1:42){ # for each weather file (DSY type and location)
         # so we run of the deconstructed weather file
         sim=simulator.deconstruct 
         outsim.deconstruct = run.simulators(building.sample) # runs the deconstructed simulator
+        WeMaxDecons = outsim.deconstruct$WeMax_day
         
         # display the compared results as a table
         res = display.results(delT.hourly,
@@ -81,8 +82,5 @@ saveRDS(x, file = paste(save.folder, 'building.configs/building configurations.R
 
 # Analyse results - histrogram stacker ---------------------------------------------------------
 results.f.names = paste(save.folder, dir(save.folder, pattern = '*.RDS'), sep='')
-temp.data = make.plot.exp3(results.f.names, DSY.file.name = 'Belfast_DSY1', n.build = no.buildings)
-
-
-temp.data = make.plot.exp3(results.f.names, DSY.file.name = 'Belfast_DSY1', n.build =74)
+temp.data = make.plot.exp4(results.f.names, DSY.file.name = 'Belfast_DSY1', n.build = 58)
 

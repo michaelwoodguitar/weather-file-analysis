@@ -73,6 +73,8 @@ CIBSE.calcs <- function(External.file){
         
         mnth.range = 5:10
         WeMax_month = rep(0, length(mnth.range))
+        WeMax_day.store = list()
+        
         
         for (mnth in mnth.range){
           
@@ -94,9 +96,10 @@ CIBSE.calcs <- function(External.file){
             
             # maximum exceedanec for the day
             WeMax_day[dy] = sum(We[We>0])
-              
+            
           }
           
+          WeMax_day.store[[mnth-4]] = WeMax_day # stores all the values for the day in the month
           WeMax_month[mnth+1-mnth.range[1]] = max(WeMax_day)
           
         }
@@ -116,6 +119,8 @@ CIBSE.calcs <- function(External.file){
         # outputs
         # =======
         
+        WeMax_day.store = unlist(WeMax_day.store)
+        
         
           o <- list(CIBSE.A,
                     CIBSE.B,
@@ -124,7 +129,7 @@ CIBSE.calcs <- function(External.file){
                     Top,
                     steps.per.hour,
                     DelT,
-                    WeMax_day) # hours greater than the comfort temperature.
+                    WeMax_day.store) # hours greater than the comfort temperature.
           
           names(o) <- c('CIBSE.A',
                         'CIBSE.B',
