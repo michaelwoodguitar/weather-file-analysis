@@ -22,6 +22,7 @@ bibliography: references.bib
 ---
 
 ```{r setup, include=FALSE}
+source('../required.R')
 knitr::opts_chunk$set(echo = TRUE)
 library(png)
 library(grid)
@@ -136,10 +137,46 @@ The weighted exceedance for a given day is the equivalent to total of the grey a
 
 The third criteria is simple; the maximum value of $\Delta T$ should be no greater than 4.  
 
-## Aims
+# Method
 
-The aim of this work is to develop a method for linking and *overheating criteria* to *events* and to be able to *rate their severtiy*. 
+## Building description
 
+The building took the following form:
+
+
+
+The reasoning behind this is:
+
+- Reason 1
+- Reason 2
+- Reason 3
+
+## Analysis of the buildings
+
+Our method is one of simple extraction. It runs the following process:
+
+![Delta T extraction process](images/Delta T extraction process.png)
+
+Once we have stored the results, we can then compare them. 
+
+# Results
+
+Set of Q-Q plots for values in the CIBSE criteria.
+
+
+
+
+## Individual outputs
+
+The plots below show three example plots for Belfast. The first shows the 'trace' of individual buildings. The lines in the trace show where $\Delta T>0$. The second shows the same results, but stacked. This allows the relative frequency that each hour is overheating for all buildings in the set. 
+
+The third graph shows the maximum weighted exceedance for a given day. (The year is indexed by hours so that it is easy to compare with the other two graphs.). This gives a measure of the severity of how much the heatwave affects all of the buildings.
+
+```{r echo=F}
+save.folder = '../exp/exp4/'
+results.f.names = paste(save.folder, dir(save.folder, pattern = '*.RDS'), sep='')
+temp.data = make.plot.exp4(results.f.names, DSY.file.name = 'Belfast_DSY1', n.build = 58)
+```
 
 
 <!-- USE THIS BIT FOR FULL PAGE FIGURES -->

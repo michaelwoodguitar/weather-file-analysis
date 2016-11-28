@@ -81,6 +81,7 @@ for (file in 1:42){ # for each weather file (DSY type and location)
 saveRDS(x, file = paste(save.folder, 'building.configs/building configurations.RDS', sep=''))
 
 # Analyse results - histrogram stacker ---------------------------------------------------------
+
 results.f.names = paste(save.folder, dir(save.folder, pattern = '*.RDS'), sep='')
 temp.data = make.plot.exp4(results.f.names, DSY.file.name = 'Belfast_DSY1', n.build = 58)
 
